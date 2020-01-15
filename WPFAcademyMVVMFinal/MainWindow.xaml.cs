@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Academy.Lib.Models;
+using Academy.Lib.Repositories;
+using Common.Lib.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,21 @@ namespace WPFAcademyMVVMFinal
         public MainWindow()
         {
             InitializeComponent();
+
+
+            //var std = new Student();
+            //std.Name = "PericoNooo";
+            //std.Dni = "abcdaaaaa";
+            //var sr = std.Save<Student>();
+
+            //if (sr.IsSuccess)
+            //{
+            //    var repoStudents = Entity.DepCon.Resolve<IStudentsRepository>();
+
+            //    var student = repoStudents.FindByDni("abcdaaaaa");
+            //    MessageBox.Show(student.Name);
+            //}
+
         }
     }
 }

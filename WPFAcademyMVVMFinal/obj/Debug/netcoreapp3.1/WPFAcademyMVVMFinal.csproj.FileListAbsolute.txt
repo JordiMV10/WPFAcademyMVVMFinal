@@ -66,3 +66,16 @@ C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\bin\Debug\ne
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\ExamsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentExamsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentSubjectsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\SubjectsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\ExamsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentExamsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentSubjectsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\SubjectsView.baml

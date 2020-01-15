@@ -21,7 +21,7 @@ namespace WPFAcademyMVVMFinal.DbContextFactory
             var dbConnection = configuration.GetConnectionString("AcademyDbConnection");
 
             var optionsBuilder = new DbContextOptionsBuilder<AcademyDbContext>();
-            optionsBuilder.UseSqlite(dbConnection, x => x.MigrationsAssembly("Academy.App.WPF"));
+            optionsBuilder.UseSqlite(dbConnection, x => x.MigrationsAssembly("WPFAcademyMVVMFinal"));
 
             return new AcademyDbContext(optionsBuilder.Options);
         }

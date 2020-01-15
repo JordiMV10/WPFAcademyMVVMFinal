@@ -36,6 +36,7 @@ namespace Common.Lib.DAL.EFCore
         public T Find(Guid id)
         {
             return DbSet.Find(id);
+            //return _dbContext.Set<T>().Find(id);  //Meu, funcionaba OK
         }
 
         public virtual SaveResult<T> Add(T entity)
@@ -88,7 +89,17 @@ namespace Common.Lib.DAL.EFCore
             if (output.IsSuccess)
             {
                 DbSet.Update(entity);
+                DbContext.SaveChanges();  //Meu
+
             }
+
+            //if (output.IsSuccess || DbSetContainsKey(entity.Id))    //MEU Funcionaba OK
+            //{
+
+            //    _dbContext.Set<T>().Update(entity);
+            //    _dbContext.SaveChanges();
+            //    output.IsSuccess = true;
+            //}
 
             return output;
         }
@@ -109,9 +120,21 @@ namespace Common.Lib.DAL.EFCore
             if (output.IsSuccess)
             {
                 DbSet.Remove(entity);
+                DbContext.SaveChanges();  //Meu
+
             }
 
             return output;
         }
+
+        //public bool DbSetContainsKey(Guid id)  //Meu funciona OK
+        //{
+        //    if (DbSet.Any(x => x.Id == id))
+        //        return true;
+        //    else
+        //        return false;
+        //}
+
+
     }
 }

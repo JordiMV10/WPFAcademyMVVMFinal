@@ -56,11 +56,16 @@ namespace Common.Lib.Infrastructure
         {
             var typeIn = typeof(Tin);
 
-            if (!ConstructorsWithParams.ContainsKey(typeIn))
-                throw new NotImplementedException();
+            if (!ConstructorsWithParams.ContainsKey(typeIn))  //OJO modificacion mia, estaba sin desarrollar
+            {
+                return Resolve<Tin>(parameters);  //
+            }
 
-            var constructor = ConstructorsWithParams[typeIn];
-            return (Tin)constructor(parameters);
+            else
+            {
+                var constructor = ConstructorsWithParams[typeIn];
+                return (Tin)constructor(parameters);
+            }
         }
     }
 }

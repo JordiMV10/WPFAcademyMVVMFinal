@@ -4,9 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFAcademyMVVMFinal"
+        xmlns:controls="clr-namespace:WPFAcademyMVVMFinal.Views"
+
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+<Grid>
+    <TabControl HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="770">
+        <TabItem Header="Students">
+            <controls:StudentsView/>
+        </TabItem>
+        <TabItem Header="Subjects">
+            <controls:SubjectsView/>
+        </TabItem>
+        <TabItem Header="StudentSubjects">
+            <controls:StudentSubjectsView/>
+        </TabItem>
+        <TabItem Header="Exams">
+            <controls:ExamsView/>
+        </TabItem>
+        <TabItem Header="StudentExams">
+            <controls:StudentExamsView/>
+        </TabItem>
+        <TabItem Header="Statistics">
+            <controls:StatisticsView/>
+        </TabItem>
+    </TabControl>
 
-    </Grid>
+
+</Grid>
 </Window>
+
