@@ -1,0 +1,15 @@
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Academy.Lib.DAL.deps.json
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Academy.Lib.DAL.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Academy.Lib.DAL.pdb
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Common.Lib.DAL.EFCore.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Common.Lib.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Common.Lib.pdb
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Common.Lib.DAL.EFCore.pdb
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\obj\Debug\netcoreapp3.1\Academy.Lib.DAL.AssemblyInfoInputs.cache
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\obj\Debug\netcoreapp3.1\Academy.Lib.DAL.AssemblyInfo.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\obj\Debug\netcoreapp3.1\Academy.Lib.DAL.csproj.CopyComplete
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\obj\Debug\netcoreapp3.1\Academy.Lib.DAL.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\obj\Debug\netcoreapp3.1\Academy.Lib.DAL.pdb
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\obj\Debug\netcoreapp3.1\Academy.Lib.DAL.csprojAssemblyReference.cache
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Academy.Lib.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib.DAL\bin\Debug\netcoreapp3.1\Academy.Lib.pdb

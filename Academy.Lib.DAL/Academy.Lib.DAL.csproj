@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Academy.Lib\Academy.Lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Common.Lib">
+      <HintPath>..\0 Core\Common.Lib.DAL.EFCore\bin\Debug\netstandard2.0\Common.Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Lib.DAL.EFCore">
+      <HintPath>..\0 Core\Common.Lib.DAL.EFCore\bin\Debug\netstandard2.0\Common.Lib.DAL.EFCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

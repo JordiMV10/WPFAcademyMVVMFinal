@@ -1,0 +1,10 @@
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\bin\Debug\netcoreapp3.1\Academy.Lib.deps.json
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\bin\Debug\netcoreapp3.1\Academy.Lib.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\bin\Debug\netcoreapp3.1\Academy.Lib.pdb
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\bin\Debug\netcoreapp3.1\Common.Lib.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\bin\Debug\netcoreapp3.1\Common.Lib.pdb
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.AssemblyInfoInputs.cache
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.AssemblyInfo.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.csproj.CopyComplete
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.dll
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.pdb
