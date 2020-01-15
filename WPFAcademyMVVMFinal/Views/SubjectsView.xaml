@@ -25,7 +25,6 @@
             <TextBox x:Name="SubjectNameText" HorizontalAlignment="Left" Height="23" Margin="155,25,0,0" TextWrapping="Wrap" Text="{Binding SubjectNameVM}" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.406,-0.783"/>
             <TextBox x:Name="SubjectTeacher"  HorizontalAlignment="Left" Height="23" Margin="155,65,0,0" TextWrapping="Wrap" Text="{Binding SubjectTeacherVM}" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.406,-0.783"/>
 
-            <!--<Label Content="MENÚ SUBJECTS" HorizontalAlignment="Left" Margin="22,25,0,0" VerticalAlignment="Top" Width="338" FontWeight="Bold" FontSize="18"/>-->
             <Grid Margin="480,24,10,10" Background="#FFBDC0CB">
                 <DataGrid ItemsSource="{Binding ErrorsList}" />
             </Grid>
@@ -46,12 +45,12 @@
                 <DataGrid x:Name="SubjectsDataGrid" ItemsSource="{Binding SubjectList}" SelectedItem="{Binding CurrentSubject}" Margin="5,5,10,5" />
                 <Button Command="{Binding EditSubjectCommand}"  Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" />
                 <Button Command="{Binding DelSubjectCommand}" Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
-
-
             </Grid>
+            
             <Grid Grid.Row="1">
                 <Button Content="Get Subjects" Command="{Binding GetSubjectsCommand}" Width="100" Margin="5" HorizontalAlignment="Right" />
             </Grid>
+            
         </Grid>
 
 

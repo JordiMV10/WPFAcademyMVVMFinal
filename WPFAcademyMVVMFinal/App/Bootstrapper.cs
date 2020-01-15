@@ -43,6 +43,12 @@ namespace WPFAcademyMVVMFinal
                 return new EfCoreRepository<Exam>(GetDbConstructor());
             });
 
+            var studentSubjectsRepoBuilder = new Func<object[], object>((parameters) =>
+            {
+                return new EfCoreRepository<StudentSubject>(GetDbConstructor());
+            });
+
+
             var studentsExamsRepoBuilder = new Func<object[], object>((parameters) =>
             {
                 return new EfCoreRepository<StudentExam>(GetDbConstructor());
@@ -53,6 +59,8 @@ namespace WPFAcademyMVVMFinal
 
             depCon.Register<IRepository<Subject>, EfCoreRepository<Subject>>(subjectsRepoBuilder);
             depCon.Register<IRepository<Exam>, EfCoreRepository<Exam>>(examsRepoBuilder);
+            depCon.Register<IRepository<StudentSubject>, EfCoreRepository<StudentSubject>>(studentSubjectsRepoBuilder);
+
             depCon.Register<IRepository<StudentExam>, EfCoreRepository<StudentExam>>(studentsExamsRepoBuilder);
         }
 
