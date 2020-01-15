@@ -11,6 +11,25 @@ namespace WPFAcademyMVVMFinal.ViewModels
 {
     public class StudentsViewModel : ViewModelBase
     {
+
+        public StudentsViewModel()
+        {
+            SaveStudentCommand = new RouteCommand(SaveStudent);
+            GetStudentsCommand = new RouteCommand(GetStudents);
+            DelStudentCommand = new RouteCommand(DelStudent);
+            EditStudentCommand = new RouteCommand(EditStudent);
+        }
+
+        #region Commands
+        public ICommand SaveStudentCommand { get; set; }
+        public ICommand GetStudentsCommand { get; set; }
+
+        public ICommand DelStudentCommand { get; set; } //Meu funciona OK
+        public ICommand EditStudentCommand { get; set; }
+        #endregion
+
+
+
         private string _dniVM;
 
         public string DniVM
@@ -47,33 +66,32 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
+        private string _emailVM;
 
-        public List<StudentsViewModel> Students
+        public string EmailVM
         {
-            get
-            {
-                return _students;
-            }
+            get { return _emailVM; }
             set
             {
-                _students = value;
+                _emailVM = value;
                 OnPropertyChanged();
             }
         }
-        List<StudentsViewModel> _students;
 
 
-        public StudentsViewModel()
+        private Student _currentStudent;
+        public Student CurrentStudent  //Meu ok funciona !!
         {
-
-            SaveStudentCommand = new RouteCommand(SaveStudent);
-            GetStudentsCommand = new RouteCommand(GetStudents);
-            DelStudentCommand = new RouteCommand(DelStudent);
-            EditStudentCommand = new RouteCommand(EditStudent);
+            get { return _currentStudent; }
+            set
+            {
+                _currentStudent = value;
+                OnPropertyChanged();
+            }
         }
 
-        List<ErrorMessage> _errorsList;
 
+        List<ErrorMessage> _errorsList;
         public List<ErrorMessage> ErrorsList
         {
             get
@@ -87,6 +105,22 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
+
+        List<Student> _studentsListNou;
+        public List<Student> StudentsListNou
+        {
+            get
+            {
+                return _studentsListNou;
+            }
+            set
+            {
+                _studentsListNou = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         bool isEdit = false;
 
         public void SaveStudent()
@@ -96,6 +130,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 Dni = DniVM,
                 Name = NameVM,
                 ChairNumber = ChairNumberVM,
+                Email = EmailVM
 
             };
 
@@ -114,6 +149,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             DniVM = "";
             NameVM = "";
             ChairNumberVM = 0;
+            EmailVM = "";
 
             isEdit = false;
         }
@@ -128,47 +164,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-
-
-
-        List<Student> _studentsListNou;
-        public List<Student> StudentsListNou
-        {
-            get
-            {
-                return _studentsListNou;
-            }
-            set
-            {
-                _studentsListNou = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
-        #region Commands
-        public ICommand SaveStudentCommand { get; set; }
-        public ICommand GetStudentsCommand { get; set; }
-
-        public ICommand DelStudentCommand { get; set; } //Meu funciona OK
-        public ICommand EditStudentCommand { get; set; }
-
-        #endregion
-
-
-        private Student _currentStudent;
-        public Student CurrentStudent  //Meu ok funciona !!
-        {
-            get { return _currentStudent; }
-            set
-            {
-                _currentStudent = value;
-                OnPropertyChanged("CurrentStudent");
-                OnPropertyChanged("CanShowInfo");
-            }
-        }
-
         public void DelStudent()    //Meu, verificado funciona OK
         {
 
@@ -180,26 +175,18 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-
             GetStudents();
 
             DniVM = "";
             NameVM = "";
             ChairNumberVM = 0;
+            EmailVM = "";
         }
 
-        private bool CanShowInfo
-        {
-            get
-            {
-                return CurrentStudent != null;
-            }
-        }
 
 
         public void EditStudent()   //Meu : Funciona ok. 
         {
-
             var student = new Student();
 
             student = CurrentStudent;
@@ -207,6 +194,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             DniVM = CurrentStudent.Dni;
             NameVM = CurrentStudent.Name;
             ChairNumberVM = CurrentStudent.ChairNumber;
+            EmailVM = CurrentStudent.Email;
 
             isEdit = true;
         }

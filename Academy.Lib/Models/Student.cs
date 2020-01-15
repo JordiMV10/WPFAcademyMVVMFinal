@@ -44,6 +44,7 @@ namespace Academy.Lib.Models
             ValidateName(output);
             ValidateDni(output);
             ValidateChairNumber(output);
+            ValidateEmail(output);
 
             return output;
         }
@@ -60,6 +61,7 @@ namespace Academy.Lib.Models
             output.Dni = this.Dni;
             output.ChairNumber = this.ChairNumber;
             output.Name = this.Name;
+            output.Email = this.Email;
 
             return output as T;
         }
@@ -78,8 +80,6 @@ namespace Academy.Lib.Models
             {
                 output.IsSuccess = false;
                 output.Errors.Add("el dni del alumno no puede estar vacío");
-
-
             }
 
             #region check duplication
@@ -101,7 +101,6 @@ namespace Academy.Lib.Models
                 if (entityWithDni.Dni == dni)
                 {
                     // on update
-                    // Console.WriteLine("Soy Student : Ya existe un alumno con este DNI");  //Meu
                     output.IsSuccess = false;
                     output.Errors.Add("ya existe un alumno con ese dni");
                 }
@@ -188,6 +187,51 @@ namespace Academy.Lib.Models
             return output;
         }
 
+        public static ValidationResult<string> ValidateEmail(string email, Guid currentId = default)
+        {
+            var output = new ValidationResult<string>()
+            {
+                IsSuccess = true
+            };
+
+            if (string.IsNullOrEmpty(email))
+            {
+                output.IsSuccess = false;
+                output.Errors.Add("el email del alumno no puede estar vacío");
+
+
+            }
+
+            #region check duplication
+            var repo = DepCon.Resolve<IRepository<Student>>();
+
+            //var entityWithDni = repo.GetStudentByDni(dni, currentId);  //Jose
+            var entityWithEmail = repo.QueryAll().FirstOrDefault(s => s.Email == email);
+
+            if (currentId == default && entityWithEmail != null)
+            {
+                // on create
+                output.IsSuccess = false;
+                output.Errors.Add("ya existe un alumno con ese email");
+
+            }
+
+            else if (currentId != default && entityWithEmail != null && entityWithEmail.Id != currentId)    //Modificado
+            {
+                if (entityWithEmail.Email == email)
+                {
+                    // on update
+                    output.IsSuccess = false;
+                    output.Errors.Add("ya existe un alumno con ese email");
+                }
+            }
+            #endregion
+
+            if (output.IsSuccess)
+                output.ValidatedResult = email;
+
+            return output;
+        }
 
         #endregion
 
@@ -227,6 +271,18 @@ namespace Academy.Lib.Models
                 validationResult.Errors.AddRange(vr.Errors);
             }
         }
+
+        public void ValidateEmail(ValidationResult validationResult)
+        {
+            var vr = ValidateEmail(this.Email, this.Id);
+
+            if (!vr.IsSuccess)
+            {
+                validationResult.IsSuccess = false;
+                validationResult.Errors.AddRange(vr.Errors);
+            }
+        }
+
 
         #endregion
 

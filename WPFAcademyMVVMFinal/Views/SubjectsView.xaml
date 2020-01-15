@@ -4,9 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFAcademyMVVMFinal.Views"
+             xmlns:ViewModels="clr-namespace:WPFAcademyMVVMFinal.ViewModels" 
+
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFE5E5E5">
-            
+        <Grid.DataContext>
+            <ViewModels:SubjectsViewModel/>
+        </Grid.DataContext>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Button Height="30" Content="Guardar Asignatura" Command="{Binding SaveSubjectCommand }" RenderTransformOrigin="2.496,0.667" Margin="345,25,345,95" />
+            <Label Content="Nombre Asignatura" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="118"/>
+            <Label Content="Profesor" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="118"/>
+            <TextBox x:Name="SubjectNameText" HorizontalAlignment="Left" Height="23" Margin="155,25,0,0" TextWrapping="Wrap" Text="{Binding SubjectNameVM}" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.406,-0.783"/>
+            <TextBox x:Name="SubjectTeacher"  HorizontalAlignment="Left" Height="23" Margin="155,65,0,0" TextWrapping="Wrap" Text="{Binding SubjectTeacherVM}" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.406,-0.783"/>
+
+            <!--<Label Content="MENÚ SUBJECTS" HorizontalAlignment="Left" Margin="22,25,0,0" VerticalAlignment="Top" Width="338" FontWeight="Bold" FontSize="18"/>-->
+            <Grid Margin="480,24,10,10" Background="#FFBDC0CB">
+                <DataGrid ItemsSource="{Binding ErrorsList}" />
+            </Grid>
+            <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="SubjectsDataGrid" ItemsSource="{Binding SubjectList}" SelectedItem="{Binding CurrentSubject}" Margin="5,5,10,5" />
+                <Button Command="{Binding EditSubjectCommand}"  Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" />
+                <Button Command="{Binding DelSubjectCommand}" Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
+
+
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Content="Get Subjects" Command="{Binding GetSubjectsCommand}" Width="100" Margin="5" HorizontalAlignment="Right" />
+            </Grid>
+        </Grid>
+
+
     </Grid>
 </UserControl>
