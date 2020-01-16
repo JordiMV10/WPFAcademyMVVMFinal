@@ -62,16 +62,16 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
-        private string _managementErrorMGVM;
-        public string ManagementErrorMGVM
-        {
-            get { return _managementErrorMGVM; }
-            set
-            {
-                _managementErrorMGVM = value;
-                OnPropertyChanged();
-            }
-        }
+        //private string _managementErrorMGVM;
+        //public string ManagementErrorMGVM
+        //{
+        //    get { return _managementErrorMGVM; }
+        //    set
+        //    {
+        //        _managementErrorMGVM = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
 
         private Student _currentStudentMVM;
@@ -81,8 +81,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             set
             {
                 _currentStudentMVM = value;
-                OnPropertyChanged("CurrentStudentMVM");
-                OnPropertyChanged("CanShowInfo");
+                OnPropertyChanged();
             }
         }
 
@@ -93,8 +92,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             set
             {
                 _currentSubjectMVM = value;
-                OnPropertyChanged("CurrentSubjectMVM");
-                OnPropertyChanged("CanShowInfo");
+                OnPropertyChanged();
             }
         }
 
@@ -158,6 +156,22 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
+        List<ErrorMessage> _errorsList;  //Nou
+        public List<ErrorMessage> ErrorsList
+        {
+            get
+            {
+                return _errorsList;
+            }
+            set
+            {
+                _errorsList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
 
         public void AddSubjectToListVM()
         {
@@ -165,34 +179,27 @@ namespace WPFAcademyMVVMFinal.ViewModels
             Student student = new Student();
             StudentSubject studentSubjectMVM = new StudentSubject();
 
-
             subject = CurrentSubjectMVM;
             student = CurrentStudentMVM;
-            studentSubjectMVM.StudentId = student.Id;
-            studentSubjectMVM.SubjectId = subject.Id;
-            ManagementErrorMGVM = "";
 
-            SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
-            if (SubjectsByStudentList != null && SubjectsByStudentList.Any(x => x.SubjectId == subject.Id))
+            if (CurrentStudentMVM != null)
             {
-                ManagementErrorMGVM = "El alumno ya tiene la asignatura";
-            }
+                studentSubjectMVM.StudentId = student.Id;
 
-            else
-            {
-                var error = studentSubjectMVM.Save();
-
-                if (error.IsSuccess == false)
+                if (CurrentSubjectMVM != null)
                 {
-                    ManagementErrorMGVM = error.ToString();
-                }
-                else
-                {
-                    var repo = StudentSubject.DepCon.Resolve<IRepository<StudentSubject>>();
-                    SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+                    studentSubjectMVM.SubjectId = subject.Id;
                 }
             }
 
+            studentSubjectMVM.Save();
+
+            ErrorsList = studentSubjectMVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();  //Nou
+
+            if (CurrentStudentMVM != null)
+            {
+                GetSubjectsToStudent();
+            }
         }
 
 
@@ -212,19 +219,24 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public void GetSubjectsToStudent()  //MEU OK Funciona 
         {
             Student student = new Student();
-
             StudentSubject studentSubjectMVM = new StudentSubject();
 
-            student = CurrentStudentMVM;
-            studentSubjectMVM.StudentId = student.Id;
+            if (CurrentStudentMVM !=null)
+            {
+                student = CurrentStudentMVM;
+                studentSubjectMVM.StudentId = student.Id;
 
-            SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+                SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+
+            }
+
 
         }
 
         private void FindStudent()   //Meu : Funciona OK
         {
             var studentsVM = new StudentsViewModel();
+
             studentsVM.GetStudents();
 
             CurrentStudentMVM = studentsVM.StudentsListNou.FirstOrDefault(x => x.Dni == DniMGVM);
@@ -233,18 +245,25 @@ namespace WPFAcademyMVVMFinal.ViewModels
             {
                 DniMGVM = CurrentStudentMVM.Dni;
                 NameMGVM = CurrentStudentMVM.Name;
-                ManagementErrorMGVM = "";
+                GetSubjectsToStudent();
             }
 
             else
             {
-                ManagementErrorMGVM = "Student no Existe";
+                NameMGVM = "Student no Existe";
+                //SubjectsByStudentList.Clear();
+                //StudentSubject studentSubjectMVM = new StudentSubject();
+                Student student = new Student();
+                CurrentStudentMVM = student;
+                //studentSubjectMVM.StudentId = default;
+
+
+                GetSubjectsToStudent();
                 DniMGVM = "";
-                NameMGVM = "";
 
             }
 
-            GetSubjectsToStudent();
+
         }
 
 

@@ -126,11 +126,11 @@ namespace Academy.Lib.Models
 
         public void ValidateTeacher(ValidationResult validationResult)
         {
-            var validateTeacherResult = ValidateTeacher(this.Teacher);
-            if (!validateTeacherResult.IsSuccess)
+            var vr = ValidateTeacher(this.Teacher);
+            if (!vr.IsSuccess)
             {
                 validationResult.IsSuccess = false;
-                validationResult.Errors.AddRange(validateTeacherResult.Errors);
+                validationResult.Errors.AddRange(vr.Errors);
             }
         }
 

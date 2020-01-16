@@ -88,6 +88,7 @@ namespace Academy.Lib.Models
             //var entityWithDni = repo.GetStudentByDni(dni, currentId);  //Jose
             var entityWithDni = repo.QueryAll().FirstOrDefault(s => s.Dni == dni);
 
+
             if (currentId == default && entityWithDni != null)
             {
                 // on create
@@ -251,11 +252,11 @@ namespace Academy.Lib.Models
 
         public void ValidateName(ValidationResult validationResult)
         {
-            var validateNameResult = ValidateName(this.Name);
-            if (!validateNameResult.IsSuccess)
+            var vr = ValidateName(this.Name);
+            if (!vr.IsSuccess)
             {
                 validationResult.IsSuccess = false;
-                validationResult.Errors.AddRange(validateNameResult.Errors);
+                validationResult.Errors.AddRange(vr.Errors);
             }
         }
 

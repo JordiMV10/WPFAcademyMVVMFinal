@@ -34,6 +34,18 @@ namespace Academy.Lib.Models
             }
         }
 
+        public override ValidationResult Validate()
+        {
+            var output = base.Validate();
+
+            ValidateName(output);
+            //ValidateTeacher(output);
+
+            return output;
+        }
+
+
+
         public SaveResult<StudentSubject> Save()   //OK funciona bien
         {
             var saveResult = base.Save<StudentSubject>();
@@ -49,12 +61,97 @@ namespace Academy.Lib.Models
             return deleteResult;
         }
 
-        public List<StudentSubject> StudentBySubjects(Guid idStudent)   //Meu Funciona OK, torna llista dels IDs dels students i les ID de les seves Subjects.
+        public  List<StudentSubject> StudentBySubjects(Guid idStudent)   //Meu Funciona OK, torna llista dels IDs dels students i les ID de les seves Subjects.
         {
             var repo = DepCon.Resolve<IRepository<StudentSubject>>();
             var entityId = repo.QueryAll().Where(e => e.StudentId == idStudent).ToList();
             return entityId;
         }
+
+        public ValidationResult<string> ValidateName(Guid studentId, Guid subjectId, Guid currentId = default)
+        {
+            var output = new ValidationResult<string>()
+            {
+                IsSuccess = true
+            };
+
+          
+            var studentBySubjects = new List<StudentSubject>();
+            studentBySubjects = StudentBySubjects(studentId); 
+
+            if (studentId == default)
+            {
+                output.IsSuccess = false;
+                output.Errors.Add("el Student no puede estar vacío");
+
+            }
+
+
+            else
+            {
+                if (subjectId == default)
+                {
+                    output.IsSuccess = false;
+                    output.Errors.Add("la Asignatura no puede estar vacío");
+
+                }
+
+
+                else
+                {
+                    var repo = DepCon.Resolve<IRepository<StudentSubject>>();
+
+                    if (studentBySubjects != null && studentBySubjects.Any(x => x.SubjectId == subjectId))
+                    {
+                        output.IsSuccess = false;
+                        output.Errors.Add("Ya está asignada esta Asignatura");
+                    }
+
+                }
+            }
+            #region check duplication
+
+
+
+            //var entityWithName = repo.QueryAll().FirstOrDefault(s => s.Subject.Name == name);
+
+            //if (currentId == default && entityWithName != null)
+            //{
+            //    // on create
+            //    output.IsSuccess = false;
+            //    output.Errors.Add("Ya está asignada esta Asignatura");
+
+            //}
+            //else if (currentId != default && entityWithName != null && entityWithName.Id != currentId)    //Modificado
+            //{
+            //    if (entityWithName.Subject.Name == name)
+            //    {
+            //        // on update
+            //        output.IsSuccess = false;
+            //        output.Errors.Add("Ya está asignada esta Asignatura");
+            //    }
+            //}
+            #endregion
+
+            //    if (output.IsSuccess)
+            //        output.ValidatedResult = name;
+
+            return output;
+        }
+
+
+        public void ValidateName(ValidationResult validationResult)
+        {
+            var vr = ValidateName(this.StudentId, this.SubjectId, this.Id);
+            if (!vr.IsSuccess)
+            {
+                validationResult.IsSuccess = false;
+                validationResult.Errors.AddRange(vr.Errors);
+            }
+
+        }
+
+
 
 
 
