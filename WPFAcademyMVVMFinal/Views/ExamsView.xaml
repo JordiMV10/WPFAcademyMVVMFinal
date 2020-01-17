@@ -64,7 +64,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Title"  Binding="{Binding Title}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Text"  Binding="{Binding Text}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Data"  Binding="{Binding  Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date"  Binding="{Binding  Date}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Subject" Binding="{Binding Subject.Name}"></DataGridTextColumn>
                     <DataGridTextColumn Header="IdExam"  Binding="{Binding  Id}"></DataGridTextColumn>
                 </DataGrid.Columns>

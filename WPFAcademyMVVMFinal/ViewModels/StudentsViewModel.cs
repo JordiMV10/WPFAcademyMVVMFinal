@@ -11,7 +11,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 {
     public class StudentsViewModel : ViewModelBase
     {
-
+        
         public StudentsViewModel()
         {
             SaveStudentCommand = new RouteCommand(SaveStudent);

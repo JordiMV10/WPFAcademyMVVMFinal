@@ -1,6 +1,9 @@
 ﻿using Common.Lib.Core;
+using Common.Lib.Core.Context;
+using Common.Lib.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Academy.Lib.Models
@@ -21,6 +24,21 @@ namespace Academy.Lib.Models
         {
 
         }
+
+        public DeleteResult<StudentExam> Delete()  //Pdte verificar si funciona
+        {
+            var deleteResult = base.Delete<StudentExam>();
+
+            return deleteResult;
+        }
+
+        public List<StudentExam> StudentByExams(Guid idStudent)   //Pdte verificar si funciona
+        {
+            var repo = DepCon.Resolve<IRepository<StudentExam>>();
+            var entityId = repo.QueryAll().Where(e => e.StudentId == idStudent).ToList();
+            return entityId;
+        }
+
     }
 
 }

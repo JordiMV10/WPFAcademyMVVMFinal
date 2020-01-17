@@ -29,23 +29,34 @@
 
         <Label Content="MENÚ STUDENT EXAMS" Grid.Column="0"   HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
         <Label Content="DNI Alumno" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding DniMGVM }"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="140,0,0,0"  VerticalAlignment="Top" Width="190" Height="25"/>
-        <Button  Command="{Binding FindStudentCommand}"    Content="Buscar Alumno" Grid.Row="1" HorizontalAlignment="Left" Margin="346,0,0,0" VerticalAlignment="Center" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <TextBox Text="{Binding DniSEVM  }"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="140,0,0,0"  VerticalAlignment="Top" Width="190" Height="25"/>
+        <Button  Command="{Binding FindStudentSEVMCommand}"    Content="Buscar Alumno" Grid.Row="1" HorizontalAlignment="Left" Margin="346,0,0,0" VerticalAlignment="Center" Height="25" FontWeight="Bold" Grid.ColumnSpan="2"/>
         <Label Content="Nombre Alumno" Grid.Row="3" HorizontalAlignment="Left" Margin="15,7,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.013,0.561" Grid.RowSpan="2"/>
-        <TextBox Text="{Binding NameMGVM}" Grid.Row="3" HorizontalAlignment="Left" Margin="140,5,0,0" VerticalAlignment="Top" Width="190" Height="25" Grid.RowSpan="3" RenderTransformOrigin="0.5,1.162" IsEnabled="False"/>
+        <TextBox Text="{Binding NameSEVM}" Grid.Row="3" HorizontalAlignment="Left" Margin="140,5,0,0" VerticalAlignment="Top" Width="190" Height="25" Grid.RowSpan="3" RenderTransformOrigin="0.5,1.162" IsEnabled="False"/>
         <Label Content="Titulo Examen" Grid.Row="6" HorizontalAlignment="Left" Margin="6,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.013,0.561"/>
-        <TextBox Text="{Binding NameMGVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Width="190" Height="25" RenderTransformOrigin="0.5,1.162" IsEnabled="False"/>
+        <TextBox Text="{Binding TitleSEVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Width="190" Height="25" RenderTransformOrigin="0.5,1.162" IsEnabled="False"/>
         <Label Content="Asignatura" HorizontalAlignment="Left" Margin="300,10,0,0" Grid.Row="6" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding NameMGVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="185" Height="25" RenderTransformOrigin="0.5,1.162" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <TextBox Text="{Binding SubjectNameSEVM }" Grid.Row="6" HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="185" Height="25" RenderTransformOrigin="0.5,1.162" IsEnabled="False" Grid.ColumnSpan="2"/>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="175,11,0,0" Grid.Row="6" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="1.528,0.544"/>
-        <TextBox Text="{Binding NameMGVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="221,11,0,0" VerticalAlignment="Top" Width="154" Height="25" RenderTransformOrigin="0.5,1.162" IsEnabled="False" Grid.Column="1"/>
+        <TextBox Text="{Binding DateSEVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="221,11,0,0" VerticalAlignment="Top" Width="154" Height="25" RenderTransformOrigin="0.5,1.162" IsEnabled="False" Grid.Column="1"/>
         <Label Content="Nota Examen" Grid.Row="6" HorizontalAlignment="Left" Margin="12,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.013,0.561"/>
-        <TextBox Text="{Binding NameMGVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="98,55,0,0" VerticalAlignment="Top" Width="190" Height="25" RenderTransformOrigin="0.5,1.162"/>
+        <TextBox Text="{Binding MarkSEVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="98,55,0,0" VerticalAlignment="Top" Width="190" Height="25" RenderTransformOrigin="0.5,1.162"/>
 
         <Grid Background="#FFE5E5E5" Grid.Row="6" Grid.Column="0" Margin="0,164,0,5" >
-            <DataGrid x:Name="SubjectsMGVMDataGrid" ItemsSource="{Binding SubjectListMGVM}" SelectedItem="{Binding CurrentSubjectMVM}" Margin="20,-60,10,40" />
-            <Button  Content="Ver Examenes" Grid.Column="0" Command="{Binding GetSubjectsMGVMCommand }"  HorizontalAlignment="Left" Margin="20,0,0,10" VerticalAlignment="Bottom" FontSize="10" RenderTransformOrigin="0.895,0.422" />
-            <Button Content="Seleccionar Examamen" Grid.Column="0" Command="{Binding AddSubjectToListVMCommand}" HorizontalAlignment="Left" Margin="255,0,0,10" VerticalAlignment="Bottom" FontSize="10" Width="120" RenderTransformOrigin="0.542,-0.561"/>
+            <DataGrid x:Name="SubjectsMGVMDataGrid" ItemsSource="{Binding ExamsListSEVM}" SelectedItem="{Binding CurrentExamSEVM}" Margin="20,-60,10,40" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title"  Binding="{Binding Title}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="SubjectName" Binding="{Binding Subject.Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date"  Binding="{Binding  Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IdExam"  Binding="{Binding  Id}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="IdExam"  Binding="{Binding  Id}"></DataGridTextColumn>
+
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+            <Button  Content="Ver Examenes" Grid.Column="0" Command="{Binding GetExamsSEVMCommand}"  HorizontalAlignment="Left" Margin="20,0,0,10" VerticalAlignment="Bottom" FontSize="10" RenderTransformOrigin="0.895,0.422" />
+            <Button Content="Seleccionar Examen" Grid.Column="0" Command="{Binding SelExamSEVMCommand}" HorizontalAlignment="Left" Margin="255,0,0,10" VerticalAlignment="Bottom" FontSize="10" Width="120" RenderTransformOrigin="0.542,-0.561"/>
 
 
 
@@ -58,9 +69,16 @@
                 <ColumnDefinition Width="141*"/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="SubjectsToStudentMGVMDataGrid" ItemsSource="{Binding SubjectsByStudentList}" SelectedItem="{Binding CurrentStudentSubjectMVM}" AutoGenerateColumns="False" Grid.ColumnSpan="3" Margin="10,10,2,5" >
+            <DataGrid x:Name="SubjectsToStudentMGVMDataGrid" ItemsSource="{Binding StudentExamsListSEVM}" SelectedItem="{Binding CurrentStudentExamSEVM}" AutoGenerateColumns="False" Grid.ColumnSpan="3" Margin="10,10,2,5" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Asignaturas"  Binding="{Binding Subject.Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Title"  Binding="{Binding Title}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="SubjectName" Binding="{Binding Exam.Subject.Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Date"  Binding="{Binding Exam.Date}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Mark"  Binding="{Binding Mark}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="HasCheated?"  Binding="{Binding HasCheated}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="IdStudentExams"  Binding="{Binding Id }"></DataGridTextColumn>
+
+
                 </DataGrid.Columns>
             </DataGrid>
             <Button Content="Editar StudentExam" Command="{Binding DelSubjectToListVMCommand}" HorizontalAlignment="Left" Margin="10,0,0,-25" VerticalAlignment="Bottom" RenderTransformOrigin="0.379,-0.251" FontSize="10" Width="130" Height="17"/>
@@ -73,7 +91,7 @@
 
         <Label Content="Error" Grid.Column="1" HorizontalAlignment="Left" Margin="84,1,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <DataGrid Grid.Column="1" ItemsSource="{Binding ErrorsList}" Margin="125,10,10,3" Grid.RowSpan="5"/>
-        <CheckBox Content="Has cheated?" HorizontalAlignment="Left" Margin="355,59,0,0" Grid.Row="6" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="107"/>
+        <CheckBox Content="Has cheated?"  HorizontalAlignment="Left" Margin="355,59,0,0" Grid.Row="6" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="107"/>
         <Button  Command="{Binding FindStudentCommand}"    Content="Guardar" Grid.Row="6" HorizontalAlignment="Left" Margin="115,55,0,0" VerticalAlignment="Top" Height="25" FontWeight="Bold" Grid.Column="1" Width="160"/>
 
 
