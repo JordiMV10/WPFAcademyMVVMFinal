@@ -265,18 +265,29 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
             Exam exam = new Exam();
 
-            exam = CurrentExamEV;
+            if (CurrentExamEV == null)
+            {
+                exam.Save();
+                ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-            exam.Delete();
+            }
 
-            ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+            else
+            {
+                ErrorsListEV = new List<ErrorMessage>();
 
+                exam = CurrentExamEV;
 
-            GetExamsEV();
+                exam.Delete();
 
-            TitleEVM = "";
-            TextEVM = "";
-            DateEVM = DateTime.Now;
+                //ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
+                GetExamsEV();
+
+                TitleEVM = "";
+                TextEVM = "";
+                DateEVM = DateTime.Now;
+            }
 
         }
 
@@ -284,17 +295,27 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
 
             Exam exam = new Exam();
+            if (CurrentExamEV == null)
+            {
+                exam.Save();
+                ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-            exam = CurrentExamEV;
+            }
 
-            Subject subject = new Subject();
+            else
+            {
+                exam = CurrentExamEV;
 
-            TitleEVM = CurrentExamEV.Title;
-            TextEVM = CurrentExamEV.Text;
-            DateEVM = CurrentExamEV.Date;
-            CurrentSubjectNameEVM = CurrentExamEV.Subject.Name;
+                Subject subject = new Subject();
 
-            isEdit = true;
+                TitleEVM = CurrentExamEV.Title;
+                TextEVM = CurrentExamEV.Text;
+                DateEVM = CurrentExamEV.Date;
+                CurrentSubjectNameEVM = CurrentExamEV.Subject.Name;
+
+                isEdit = true;
+
+            }
         }
     }
 }

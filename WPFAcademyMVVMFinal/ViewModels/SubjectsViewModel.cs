@@ -149,13 +149,27 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
             var subject = new Subject();
 
-            subject = CurrentSubject;
+            if (CurrentSubject == null)
+            {
+                subject.Save();
+                ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-            SubjectNameVM = CurrentSubject.Name;
-            SubjectTeacherVM = CurrentSubject.Teacher;
+            }
+
+            else
+            {
+                ErrorsList = new List<ErrorMessage>();
+
+                subject = CurrentSubject;
+
+                SubjectNameVM = CurrentSubject.Name;
+                SubjectTeacherVM = CurrentSubject.Teacher;
 
 
-            isEdit = true;
+                isEdit = true;
+
+            }
+
         }
 
 
@@ -163,16 +177,28 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
             Subject subject = new Subject();
 
-            subject = CurrentSubject;
+            if (CurrentSubject == null)
+            {
+                subject.Save();
+                ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-            subject.Delete();
+            }
 
-            ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+            else
+            {
+                ErrorsList = new List<ErrorMessage>();               
+                subject = CurrentSubject;
 
-            GetSubjects();
+                subject.Delete();
 
-            SubjectNameVM = "";
-            SubjectTeacherVM = "";
+                //ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
+                GetSubjects();
+
+                SubjectNameVM = "";
+                SubjectTeacherVM = "";
+
+            }
 
 
         }

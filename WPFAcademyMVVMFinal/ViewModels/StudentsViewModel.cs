@@ -169,18 +169,30 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             Student student = new Student();
 
-            student = CurrentStudent;
+            if (CurrentStudent == null)
+            {
+                student.Save();
+                ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-            student.Delete();   
+            }
 
-            ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+            else
+            {
+                student = CurrentStudent;
 
-            GetStudents();
+                student.Delete();
 
-            DniVM = "";
-            NameVM = "";
-            ChairNumberVM = 0;
-            EmailVM = "";
+                //ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+                ErrorsList = new List<ErrorMessage>();
+
+                GetStudents();
+
+                DniVM = "";
+                NameVM = "";
+                ChairNumberVM = 0;
+                EmailVM = "";
+
+            }
         }
 
 
@@ -189,14 +201,26 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
             var student = new Student();
 
-            student = CurrentStudent;
+            if (CurrentStudent == null)
+            {
+                student.Save();
+                ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-            DniVM = CurrentStudent.Dni;
-            NameVM = CurrentStudent.Name;
-            ChairNumberVM = CurrentStudent.ChairNumber;
-            EmailVM = CurrentStudent.Email;
+            }
 
-            isEdit = true;
+            else
+            {
+                ErrorsList = new List<ErrorMessage>();
+                student = CurrentStudent;
+
+                DniVM = CurrentStudent.Dni;
+                NameVM = CurrentStudent.Name;
+                ChairNumberVM = CurrentStudent.ChairNumber;
+                EmailVM = CurrentStudent.Email;
+
+                isEdit = true;
+
+            }
         }
 
 
