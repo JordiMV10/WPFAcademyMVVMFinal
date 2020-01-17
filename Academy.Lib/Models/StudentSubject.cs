@@ -79,62 +79,49 @@ namespace Academy.Lib.Models
             var studentBySubjects = new List<StudentSubject>();
             studentBySubjects = StudentBySubjects(studentId); 
 
-            if (studentId == default)
+            //On Delete
+            if (currentId != default) 
             {
-                output.IsSuccess = false;
-                output.Errors.Add("el Student no puede estar vacío");
+                output.IsSuccess = true;
 
             }
 
-
+            //On Create
             else
             {
-                if (subjectId == default)
+                if (studentId == default)
                 {
                     output.IsSuccess = false;
-                    output.Errors.Add("la Asignatura no puede estar vacío");
+                    output.Errors.Add("el Student no puede estar vacío");
 
                 }
 
 
                 else
                 {
-                    var repo = DepCon.Resolve<IRepository<StudentSubject>>();
-
-                    if (studentBySubjects != null && studentBySubjects.Any(x => x.SubjectId == subjectId))
+                    if (subjectId == default)
                     {
                         output.IsSuccess = false;
-                        output.Errors.Add("Ya está asignada esta Asignatura");
+                        output.Errors.Add("la Asignatura no puede estar vacío");
+
                     }
 
+
+                    else
+                    {
+                        var repo = DepCon.Resolve<IRepository<StudentSubject>>();
+
+                        if (studentBySubjects != null && studentBySubjects.Any(x => x.SubjectId == subjectId))
+                        {
+                            output.IsSuccess = false;
+                            output.Errors.Add("Ya está asignada esta Asignatura");
+                        }
+
+                    }
                 }
+                
+
             }
-            #region check duplication
-
-
-
-            //var entityWithName = repo.QueryAll().FirstOrDefault(s => s.Subject.Name == name);
-
-            //if (currentId == default && entityWithName != null)
-            //{
-            //    // on create
-            //    output.IsSuccess = false;
-            //    output.Errors.Add("Ya está asignada esta Asignatura");
-
-            //}
-            //else if (currentId != default && entityWithName != null && entityWithName.Id != currentId)    //Modificado
-            //{
-            //    if (entityWithName.Subject.Name == name)
-            //    {
-            //        // on update
-            //        output.IsSuccess = false;
-            //        output.Errors.Add("Ya está asignada esta Asignatura");
-            //    }
-            //}
-            #endregion
-
-            //    if (output.IsSuccess)
-            //        output.ValidatedResult = name;
 
             return output;
         }

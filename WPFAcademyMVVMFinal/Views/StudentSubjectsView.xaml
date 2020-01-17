@@ -40,9 +40,9 @@
         <Label Content="Asignaturas" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top"/>
         <!--<Label Content="Asignaturas Añadidas" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="15,5,0,0" VerticalAlignment="Top" FontSize="10"/>-->
         <Grid Background="#FFE5E5E5" Grid.Row="6" Grid.Column="0" Margin="0,0,30,5" Grid.RowSpan="3" >
-            <DataGrid x:Name="SubjectsMGVMDataGrid" ItemsSource="{Binding SubjectListMGVM}" SelectedItem="{Binding CurrentSubjectMVM}" Margin="20,20,-5,45" />
+            <DataGrid x:Name="SubjectsMGVMDataGrid" ItemsSource="{Binding SubjectListMGVM}" SelectedItem="{Binding CurrentSubjectMVM}" Margin="20,20,-15,45" />
             <Button  Content="Ver Asignaturas" Grid.Column="0" Command="{Binding GetSubjectsMGVMCommand }"  HorizontalAlignment="Left" Margin="20,0,0,10" VerticalAlignment="Bottom" FontSize="10" RenderTransformOrigin="0.895,0.422" />
-            <Button Content="AñadirAsignatura" Grid.Column="0" Command="{Binding AddSubjectToListVMCommand}" HorizontalAlignment="Left" Margin="248,0,0,10" VerticalAlignment="Bottom" FontSize="10" Width="120" RenderTransformOrigin="0.542,-0.561"/>
+            <Button Content="AñadirAsignatura" Grid.Column="0" Command="{Binding AddSubjectToListVMCommand}" HorizontalAlignment="Left" Margin="230,0,0,10" VerticalAlignment="Bottom" FontSize="10" Width="120" RenderTransformOrigin="0.542,-0.561"/>
 
 
 

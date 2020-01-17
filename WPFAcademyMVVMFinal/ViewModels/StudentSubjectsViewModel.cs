@@ -212,6 +212,8 @@ namespace WPFAcademyMVVMFinal.ViewModels
             studentSubjectMVM.Delete();
 
             SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+            ErrorsList = new List<ErrorMessage>();
+
             GetSubjectsToStudent();
         }
 
@@ -236,6 +238,8 @@ namespace WPFAcademyMVVMFinal.ViewModels
         private void FindStudent()   //Meu : Funciona OK
         {
             var studentsVM = new StudentsViewModel();
+            StudentSubject studentSubjectMVM = new StudentSubject();
+
 
             studentsVM.GetStudents();
 
@@ -245,17 +249,18 @@ namespace WPFAcademyMVVMFinal.ViewModels
             {
                 DniMGVM = CurrentStudentMVM.Dni;
                 NameMGVM = CurrentStudentMVM.Name;
+                ErrorsList = new List<ErrorMessage>();
+
+
                 GetSubjectsToStudent();
             }
 
             else
             {
                 NameMGVM = "Student no Existe";
-                //SubjectsByStudentList.Clear();
-                //StudentSubject studentSubjectMVM = new StudentSubject();
                 Student student = new Student();
                 CurrentStudentMVM = student;
-                //studentSubjectMVM.StudentId = default;
+                ErrorsList = new List<ErrorMessage>();
 
 
                 GetSubjectsToStudent();
