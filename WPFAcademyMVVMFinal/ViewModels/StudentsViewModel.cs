@@ -171,7 +171,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             if (CurrentStudent == null)
             {
-                student.Save();
+                student.Delete();  
                 ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
             }
@@ -182,8 +182,9 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
                 student.Delete();
 
-                //ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
                 ErrorsList = new List<ErrorMessage>();
+                ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
 
                 GetStudents();
 

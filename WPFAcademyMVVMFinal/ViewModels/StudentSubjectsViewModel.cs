@@ -207,14 +207,29 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
             StudentSubject studentSubjectMVM = new StudentSubject();
 
-            studentSubjectMVM = CurrentStudentSubjectMVM;
+            if (CurrentStudentSubjectMVM == null)
+            {
+                studentSubjectMVM.Delete();
+                ErrorsList = studentSubjectMVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-            studentSubjectMVM.Delete();
+            }
 
-            SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
-            ErrorsList = new List<ErrorMessage>();
+            else
+            {
+                ErrorsList = new List<ErrorMessage>();
+                studentSubjectMVM = CurrentStudentSubjectMVM;
 
-            GetSubjectsToStudent();
+                studentSubjectMVM.Delete();
+                ErrorsList = studentSubjectMVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
+
+                SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+                
+
+                GetSubjectsToStudent();
+
+            }
+
         }
 
 

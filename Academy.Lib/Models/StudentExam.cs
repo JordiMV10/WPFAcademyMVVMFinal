@@ -25,6 +25,15 @@ namespace Academy.Lib.Models
 
         }
 
+
+        public SaveResult<StudentExam> Save() //Pdte verificar si funciona
+        {
+            var saveResult = base.Save<StudentExam>();
+
+            return saveResult;
+        }
+
+
         public DeleteResult<StudentExam> Delete()  //Pdte verificar si funciona
         {
             var deleteResult = base.Delete<StudentExam>();

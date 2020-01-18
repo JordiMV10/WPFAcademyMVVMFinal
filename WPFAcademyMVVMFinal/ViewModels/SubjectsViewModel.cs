@@ -179,7 +179,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             if (CurrentSubject == null)
             {
-                subject.Save();
+                subject.Delete();
                 ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
             }
@@ -191,7 +191,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
                 subject.Delete();
 
-                //ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+                ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
                 GetSubjects();
 
@@ -199,11 +199,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 SubjectTeacherVM = "";
 
             }
-
-
         }
-
-
     }
 }
 
