@@ -20,6 +20,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             SelExamSEVMCommand = new RouteCommand(SelExamSEVM);
             EditStudentExamsSEVMCommand = new RouteCommand(EditStudentExamsSEVM);
             DelStudentExamsSEVMCommand = new RouteCommand(DelStudentExamsSEVM);
+            SaveStudentExamsSEVMCommand = new RouteCommand(SaveStudentExamsSEVM);
 
 
         }
@@ -32,6 +33,8 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public ICommand SelExamSEVMCommand { get; set; }
         public ICommand EditStudentExamsSEVMCommand { get; set; }
         public ICommand DelStudentExamsSEVMCommand { get; set; }
+        public ICommand SaveStudentExamsSEVMCommand { get; set; }
+
 
 
 
@@ -220,6 +223,58 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
+        bool isEdit = false;
+
+        public void SaveStudentExamsSEVM()   //Pdte probar funcionamiento
+        {
+
+            StudentExam studentExamsSEVM = new StudentExam();
+
+            Exam exam = new Exam();
+            Student student = new Student();
+            ErrorsList = new List<ErrorMessage>();
+
+
+            exam = CurrentExamSEVM;
+            student = CurrentStudentSEVM;
+            studentExamsSEVM = CurrentStudentExamSEVM;
+            studentExamsSEVM.Mark = MarkSEVM;
+            studentExamsSEVM.HasCheated = HasCheatedSEVM;
+
+            if (CurrentStudentSEVM != null)
+            {
+                studentExamsSEVM.StudentId = student.Id;
+                
+
+                if (CurrentExamSEVM != null)
+                {
+
+                    studentExamsSEVM.ExamId = exam.Id;
+                }
+            }
+
+            studentExamsSEVM.Save();
+
+            ErrorsList = studentExamsSEVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();  //Nou
+
+            if (CurrentStudentSEVM != null)
+            {
+                GetStudentExamsSEVM();
+            }
+
+            CurrentStudentSEVM = null;
+            _currentExamSEVM = null;
+            CurrentStudentExamSEVM = null;
+            DniSEVM = "";
+            NameSEVM = "";
+            TitleSEVM = "";
+            SubjectNameSEVM = "";
+            DateSEVM = default;
+            MarkSEVM = 0;
+            HasCheatedSEVM = false;
+
+            isEdit = false;
+        }
 
 
 
@@ -228,7 +283,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
 
-        public void EditStudentExamsSEVM()  //Pdte. acabar ???  Repasar y probar
+        public void EditStudentExamsSEVM()  //Pdte. Repasar y probar mejor. parece funciona OK
         {
             StudentExam studentExam = new StudentExam();
 
@@ -240,30 +295,46 @@ namespace WPFAcademyMVVMFinal.ViewModels
             MarkSEVM = CurrentStudentExamSEVM.Mark;
             HasCheatedSEVM = CurrentStudentExamSEVM.HasCheated;
 
-            studentExam.Student.Dni = DniSEVM;
-            studentExam.Student.Name = NameSEVM;
-            studentExam.Exam.Title = TitleSEVM;
-            studentExam.Exam.Subject.Name = SubjectNameSEVM;
-            studentExam.Exam.Date = DateSEVM;
-            studentExam.Mark = MarkSEVM;
-            studentExam.HasCheated = HasCheatedSEVM;
-
+            CurrentExamSEVM = CurrentStudentExamSEVM.Exam;
 
         }
 
 
-        public void DelStudentExamsSEVM()    // Pdte.acabar  ???? Y probar
+        public void DelStudentExamsSEVM()    //Funciona OK
         {
             StudentExam studentExam = new StudentExam();
-            studentExam = CurrentStudentExamSEVM;
-            studentExam.Delete();
 
+            if (CurrentStudentExamSEVM == null)
+            {
+                studentExam.Delete();
+                ErrorsList = studentExam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
+            }
+
+            else
+            {
+                ErrorsList = new List<ErrorMessage>();
+
+                studentExam = CurrentStudentExamSEVM;
+                studentExam.Delete();
+                ErrorsList = studentExam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
+                GetStudentExamsSEVM();
+
+                //DniSEVM = "";
+                //NameSEVM = "";
+                //TitleSEVM = "";
+                //SubjectNameSEVM = "";
+                //DateSEVM = default;
+                //MarkSEVM = 0;
+                //HasCheatedSEVM = false;
+
+            }
         }
 
 
 
-        private void FindStudentSEVM()   //Funciona OK  Pdte confirmar protecciones
+        private void FindStudentSEVM()   //Funciona OK  
         {
             var studentsVM = new StudentsViewModel();
             StudentSubject studentSubjectMVM = new StudentSubject();
@@ -312,18 +383,20 @@ namespace WPFAcademyMVVMFinal.ViewModels
             DateSEVM = CurrentExamSEVM.Date;
         }
 
-        public void GetStudentExamsSEVM()  //  Pdte. probar funcionamiento.
+        public void GetStudentExamsSEVM()  //  OK funciona perfecto !!.
         {
             Student student = new Student();
+            Exam exam = new Exam();
             StudentExam studentExam = new StudentExam();
 
             if (CurrentStudentSEVM != null)
             {
+                
                 student = CurrentStudentSEVM;
+                exam = CurrentExamSEVM;
                 studentExam.StudentId = student.Id;
 
                 StudentExamsListSEVM = studentExam.StudentByExams(studentExam.StudentId);
-
             }
 
 

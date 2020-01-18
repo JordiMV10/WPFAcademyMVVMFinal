@@ -8,4 +8,3 @@ C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.csproj.CopyComplete
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.dll
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.pdb
-C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\Academy.Lib\obj\Debug\netcoreapp3.1\Academy.Lib.csprojAssemblyReference.cache
