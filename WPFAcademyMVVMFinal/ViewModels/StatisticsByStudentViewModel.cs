@@ -9,10 +9,10 @@ using WPFAcademyMVVMFinal.Lib.UI;
 
 namespace WPFAcademyMVVMFinal.ViewModels
 {
-    public class StatisticsViewModel : ViewModelBase
+    public class StatisticsByStudentViewModel : ViewModelBase
     {
 
-        public StatisticsViewModel()
+        public StatisticsByStudentViewModel()
         {
             FindStudentSVMCommand = new RouteCommand(FindStudentSVM);
             GetStudentExamsSVMCommand = new RouteCommand(GetStudentExamsSVM);
@@ -24,8 +24,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-
-
         public ICommand FindStudentSVMCommand { get; set; }
         public ICommand GetStudentExamsSVMCommand { get; set; }
         public ICommand GetAllStudentExamsSVMCommand { get; set; }
@@ -34,10 +32,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public ICommand MinMarkSVMCommand { get; set; }
 
 
-
-
-
-
+        #region Propierties
 
         private string _dniSVM;
         public string DniSVM
@@ -63,7 +58,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         private Student _currentStudentSVM;
-        public Student CurrentStudentSVM  //Meu ok funciona !!
+        public Student CurrentStudentSVM  
         {
             get { return _currentStudentSVM; }
             set
@@ -103,11 +98,8 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-
-
-
         private Subject _currentSubjectSVM;
-        public Subject CurrentSubjectSVM  //Meu ok funciona !!
+        public Subject CurrentSubjectSVM  
         {
             get { return _currentSubjectSVM; }
             set
@@ -149,7 +141,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
         List<StudentSubject> _subjectsByStudentList;
-        public List<StudentSubject> SubjectsByStudentList  //Meu 
+        public List<StudentSubject> SubjectsByStudentList   
         {
             get
             {
@@ -191,8 +183,10 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
+        #endregion
 
-        private void FindStudentSVM()   //Meu : Funciona OK
+        #region Métodos de Búsqueda
+        private void FindStudentSVM()   
         {
             ErrorsSVM = "";
             var studentsVM = new StudentsViewModel();
@@ -207,10 +201,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             {
                 DniSVM = CurrentStudentSVM.Dni;
                 NameSVM = CurrentStudentSVM.Name;
-                //ErrorsList = new List<ErrorMessage>();
 
-
-                //GetSubjectsToStudent();
                 GetSubjectsNameEV();
             }
 
@@ -219,18 +210,16 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 ErrorsSVM = "Student no Existe";
                 Student student = new Student();
                 CurrentStudentSVM = student;
-                //ErrorsList = new List<ErrorMessage>();
 
-
-                //GetSubjectsToStudent();
                 GetSubjectsNameEV();
+
                 DniSVM = "";
                 NameSVM = "";
 
             }
         }
 
-        public void GetSubjectsToStudent()  //MEU OK Funciona 
+        public void GetSubjectsToStudent()  
         {
             Student student = new Student();
             StudentSubject studentSubjectSVM = new StudentSubject();
@@ -243,21 +232,9 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 SubjectsByStudentList = studentSubjectSVM.StudentBySubjects(studentSubjectSVM.StudentId);
 
             }
-
-
         }
 
-
-
-
-        //public void GetSubjectsEV()  //NO TOCAR
-        //{
-        //    var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
-        //    SubjectsListEV = repo.QueryAll().ToList();
-        //}
-
-
-        public List<string> GetSubjectsByNameEV()  //NO TOCAR
+        public List<string> GetSubjectsByNameEV()  
         {
             GetSubjectsToStudent();
             List<string> SubjectsNameListEV = new List<string>();
@@ -270,14 +247,14 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void GetSubjectsNameEV()  //OK Funciona No tocar !!!!
+        public void GetSubjectsNameEV()  
         {
             SubjectsNameListSVM = GetSubjectsByNameEV();
         }
 
 
         bool exams = false;
-        public void GetStudentExamsSVM()  //  OK funciona perfecto !!.
+        public void GetStudentExamsSVM()  
         {
             ErrorsSVM = "";
 
@@ -289,7 +266,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
             {
 
                 student = CurrentStudentSVM;
-                //exam = CurrentExamSEVM;
                 studentExam.StudentId = student.Id;
 
                 StudentExamsListSVM = studentExam.StudentByExams(studentExam.StudentId);
@@ -323,6 +299,10 @@ namespace WPFAcademyMVVMFinal.ViewModels
             exams = true;
         }
 
+        #endregion
+
+
+        #region  Statistics
         public void AvgMarkSVM()
         {
             MarkSVM = 0;
@@ -411,6 +391,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 return null;
             }
         }
-
+        #endregion
     }
 }

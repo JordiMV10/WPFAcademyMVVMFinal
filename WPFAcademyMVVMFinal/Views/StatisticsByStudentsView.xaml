@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFE5E5E5" Margin="0,0,0,10">
         <Grid.DataContext>
-            <ViewModels:StatisticsViewModel/>
+            <ViewModels:StatisticsByStudentViewModel/>
         </Grid.DataContext>
 
 
@@ -71,9 +71,9 @@
             </Grid.ColumnDefinitions>
             <DataGrid ItemsSource="{Binding ErrorsList}" Margin="0,0,0,0" Grid.ColumnSpan="2" />
         </Grid>-->
-        <Button Content="Max Mark" Command="{Binding MaxMarkSVMCommand}" HorizontalAlignment="Left" Margin="325,110,0,0" VerticalAlignment="Top" Width="70" Height="30"/>
-        <Button Content="Min Mark" Command="{Binding MinMarkSVMCommand}" HorizontalAlignment="Left" Margin="440,110,0,0" VerticalAlignment="Top" Width="70" Height="30" RenderTransformOrigin="-0.571,0.3"/>
-        <Button Content="Avg Mark" Command="{Binding AvgMarkSVMCommand}"    HorizontalAlignment="Left" Margin="560,110,0,0" VerticalAlignment="Top" Width="70" Height="30"/>
+        <Button Content="MAX Mark" Command="{Binding MaxMarkSVMCommand}" HorizontalAlignment="Left" Margin="325,110,0,0" VerticalAlignment="Top" Width="70" Height="30"/>
+        <Button Content="MIN Mark" Command="{Binding MinMarkSVMCommand}" HorizontalAlignment="Left" Margin="440,110,0,0" VerticalAlignment="Top" Width="70" Height="30" RenderTransformOrigin="-0.571,0.3"/>
+        <Button Content="AVG Mark" Command="{Binding AvgMarkSVMCommand}"    HorizontalAlignment="Left" Margin="560,110,0,0" VerticalAlignment="Top" Width="70" Height="30"/>
         <TextBox x:Name="AvgMArkText" Text="{Binding MarkSVM}" HorizontalAlignment="Left" Margin="650,110,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.208,0.557" Height="30" IsEnabled="False"/>
 
 
