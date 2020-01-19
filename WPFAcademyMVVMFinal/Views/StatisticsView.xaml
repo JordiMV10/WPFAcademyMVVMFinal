@@ -4,9 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFAcademyMVVMFinal.Views"
+             xmlns:controls="clr-namespace:WPFAcademyMVVMFinal.Views"
+
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFE5E5E5">
-            
+        <TabControl HorizontalAlignment="Center" Height="405" Margin="0,5,0,0" VerticalAlignment="Top" Width="760">
+            <TabItem Header="By Students">
+                <controls:StatisticsByStudentsView/>
+            </TabItem>
+            <TabItem Header="By Subjects">
+                <controls:StatisticsBySubjectsView/>
+            </TabItem>
+            <TabItem Header="By Exams">
+                <controls:StatisticsByExamsView/>
+            </TabItem>
+
+
+
+        </TabControl>
+
+
     </Grid>
 </UserControl>

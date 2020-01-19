@@ -229,6 +229,10 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
 
             StudentExam studentExamsSEVM = new StudentExam();
+            //{
+            //    Mark = MarkSEVM,
+            //    HasCheated = HasCheatedSEVM
+            //};
 
             Exam exam = new Exam();
             Student student = new Student();
@@ -237,9 +241,14 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             exam = CurrentExamSEVM;
             student = CurrentStudentSEVM;
-            studentExamsSEVM = CurrentStudentExamSEVM;
-            studentExamsSEVM.Mark = MarkSEVM;
-            studentExamsSEVM.HasCheated = HasCheatedSEVM;
+            if (CurrentStudentExamSEVM != null)
+            {
+                studentExamsSEVM = CurrentStudentExamSEVM;
+            }
+                studentExamsSEVM.Mark = MarkSEVM;
+                studentExamsSEVM.HasCheated = HasCheatedSEVM;
+
+            //}
 
             if (CurrentStudentSEVM != null)
             {
@@ -257,7 +266,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             ErrorsList = studentExamsSEVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();  //Nou
 
-            if (CurrentStudentSEVM != null)
+            if (CurrentStudentSEVM != null || CurrentStudentExamSEVM != null)
             {
                 GetStudentExamsSEVM();
             }

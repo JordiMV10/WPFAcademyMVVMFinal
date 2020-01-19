@@ -10,7 +10,6 @@ namespace Academy.Lib.Models
 {
     public class StudentExam : Entity
     {
-        //public Exam Exam { get; set; }
 
         public Exam Exam
         {
@@ -142,10 +141,16 @@ namespace Academy.Lib.Models
 
             #region check format conversion
 
-            isConversionOk = double.TryParse(markText, out mark);
+            isConversionOk = double.TryParse(markText.Replace(".", ","), out mark);
             //Pdte ajustar la coma de las notas
+            //OJO, intentar aplicar : 
+            //var nota = 0.0;
 
-            if (!isConversionOk)
+            //if (double.TryParse(notaText.Replace(".", ","), out nota))
+
+
+
+                if (!isConversionOk)
             {
                 output.IsSuccess = false;
                 output.Errors.Add($"no se puede convertir {markText} en número");

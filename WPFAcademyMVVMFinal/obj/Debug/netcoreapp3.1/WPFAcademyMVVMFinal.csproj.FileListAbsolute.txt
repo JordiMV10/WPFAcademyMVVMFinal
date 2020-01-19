@@ -79,3 +79,9 @@ C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\ne
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentSubjectsView.baml
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StudentsView.baml
 C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\SubjectsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsByExamsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsByStudentsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsBySubjectsView.g.cs
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsByExamsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsByStudentsView.baml
+C:\Users\jordi\source\repos\WPFAcademyMVVMFinal\WPFAcademyMVVMFinal\obj\Debug\netcoreapp3.1\Views\StatisticsBySubjectsView.baml

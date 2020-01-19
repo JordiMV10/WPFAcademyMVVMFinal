@@ -10,19 +10,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPFAcademyMVVMFinal.ViewModels;
 
 namespace WPFAcademyMVVMFinal.Views
 {
     /// <summary>
-    /// Lógica de interacción para ExamsView.xaml
+    /// Lógica de interacción para StatisticsBySubjectsView.xaml
     /// </summary>
-    public partial class ExamsView : UserControl
+    public partial class StatisticsBySubjectsView : UserControl
     {
-        public ExamsView()
+        public StatisticsBySubjectsView()
         {
             InitializeComponent();
-
         }
     }
 }
