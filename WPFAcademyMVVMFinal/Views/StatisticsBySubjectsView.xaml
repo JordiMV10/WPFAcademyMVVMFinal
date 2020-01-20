@@ -4,9 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFAcademyMVVMFinal.Views"
+             xmlns:ViewModels="clr-namespace:WPFAcademyMVVMFinal.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#FFE5E5E5">
-            
+    <Grid Background="#FFE5E5E5" Margin="0,0,0,10">
+        <Grid.DataContext>
+            <ViewModels:StatisticsBySubjectViewModel/>
+        </Grid.DataContext>
+
+        <Label Content="Subject" HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
+        <ComboBox x:Name="ComboBoxSubjects"  HorizontalAlignment="Left" Margin="145,10,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding SubjectsNameListEV}" DataContext="{Binding Mode=OneWay}" SelectedItem="{Binding CurrentSubjectNameEVM}" />
+        <Button  Command="{Binding LoadDataByNameCommand}"    Content="Load DATA"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="62" FontWeight="Normal" Width="70"/>
+
+        <Button  Command="{Binding GetSubjectByStudentsEVCommand}"    Content="FIND Students"  HorizontalAlignment="Left" Margin="350,10,0,0" VerticalAlignment="Top" Height="25" FontWeight="Normal" Width="85"/>
+
+        <Label Content="Exam" HorizontalAlignment="Left" Margin="85,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
+        <ComboBox x:Name="ComboBoxExams"   HorizontalAlignment="Left" Margin="145,50,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding ExamsNameListEV}" DataContext="{Binding Mode=OneWay}" SelectedItem="{Binding CurrentExamNameEVM}" />
+        <Button  Content="FIND StudentExams" Command="{Binding GetStudentExamsSVMCommand}"      HorizontalAlignment="Left" Margin="350,50,0,0" VerticalAlignment="Top" Height="25" FontWeight="Normal" Width="115"/>
+
+
+        <Grid Background="#FFE5E5E5"  Margin="5,90,480,5" >
+            <DataGrid x:Name="SubjectsByStudentDataGrid" ItemsSource="{Binding SubjectByStudentsList}" Margin="10,10,10,35" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="DNI"  Binding="{Binding Student.Dni}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name"  Binding="{Binding  Student.Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="ChairNumber"  Binding="{Binding Student.ChairNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IdStudent"  Binding="{Binding Student.Id}"></DataGridTextColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+
+        <Grid Background="#FFE5E5E5"  Margin="315,155,20,10" >
+            <DataGrid  ItemsSource="{Binding ExamsListSEVM}" SelectedItem="{Binding CurrentExamSEVM}" Margin="10,10,10,30" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="DNI"  Binding="{Binding Exam.Title}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name"  Binding="{Binding  Mark}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Title"  Binding="{Binding Title}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date"  Binding="{Binding  Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Mark"  Binding="{Binding  Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IdStudentExam"  Binding="{Binding  Id}"></DataGridTextColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+
+
+
+
+
+
+        <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="580,15,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic" Height="21" Padding="1,1,1,1"/>
+        <TextBox   HorizontalAlignment="Left" Height="45" Margin="490,50,0,0" TextWrapping="Wrap" Text="{Binding ErrorsSVM}" VerticalAlignment="Top" Width="255" RenderTransformOrigin="0.292,0.209" IsEnabled="False"/>
+
+        <Button Content="MAX Mark" Command="{Binding MaxMarkSVMCommand}" HorizontalAlignment="Left" Margin="325,110,0,0" VerticalAlignment="Top" Width="70" Height="30"/>
+        <Button Content="MIN Mark" Command="{Binding MinMarkSVMCommand}" HorizontalAlignment="Left" Margin="440,110,0,0" VerticalAlignment="Top" Width="70" Height="30" RenderTransformOrigin="-0.571,0.3"/>
+        <Button Content="AVG Mark" Command="{Binding AvgMarkSVMCommand}"    HorizontalAlignment="Left" Margin="560,110,0,0" VerticalAlignment="Top" Width="70" Height="30"/>
+        <TextBox x:Name="AvgMArkText" Text="{Binding MarkSVM}" HorizontalAlignment="Left" Margin="650,110,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.208,0.557" Height="30" IsEnabled="False"/>
+
+
     </Grid>
 </UserControl>
