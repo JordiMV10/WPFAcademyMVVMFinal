@@ -234,7 +234,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
-        public List<string> GetSubjectsByNameEV()  
+        public List<string> GetSubjectsByNameEV()
         {
             GetSubjectsToStudent();
             List<string> SubjectsNameListEV = new List<string>();

@@ -54,6 +54,19 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
+        private string _chairTextVM;
+
+        public string ChairTextVM
+        {
+            get { return _chairTextVM; }
+            set
+            {
+                _chairTextVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private int _chairNumberVM;
 
         public int ChairNumberVM
@@ -125,31 +138,47 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         public void SaveStudent()
         {
-            Student student = new Student()
+            var chair = 0;
+
+            if (!(int.TryParse(ChairTextVM, out chair)))
             {
-                Dni = DniVM,
-                Name = NameVM,
-                ChairNumber = ChairNumberVM,
-                Email = EmailVM
+                ChairTextVM = "La silla introducida no es correcta";
+                DniVM = "";
+                NameVM = "";
+                EmailVM = "";
+            }
 
-            };
+            else
+            {
+                ChairNumberVM = chair;
+                Student student = new Student()
+                {
+                    Dni = DniVM,
+                    Name = NameVM,
+                    ChairNumber = ChairNumberVM,
+                    Email = EmailVM
 
-            if (isEdit == false)
+                };
+
+                if (isEdit == false)
+                    CurrentStudent = null;
+
+                if (CurrentStudent != null)
+                    student.Id = CurrentStudent.Id;
+
+                student.Save();
+
+
+                ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+                GetStudents();
                 CurrentStudent = null;
+                DniVM = "";
+                NameVM = "";
+                ChairTextVM = "";
+                EmailVM = "";
 
-            if (CurrentStudent != null)
-                student.Id = CurrentStudent.Id;
+            }
 
-            student.Save();  
-
-
-            ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
-            GetStudents();
-            CurrentStudent = null;
-            DniVM = "";
-            NameVM = "";
-            ChairNumberVM = 0;
-            EmailVM = "";
 
             isEdit = false;
         }

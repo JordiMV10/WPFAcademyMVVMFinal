@@ -110,6 +110,23 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
+        private string _markTextSEVM;
+        public string MarkTextSEVM
+        {
+            get
+            {
+                return _markTextSEVM;
+            }
+            set
+            {
+                _markTextSEVM = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+
+
         private bool _hasCheatedSEVM;
         public bool HasCheatedSEVM
         {
@@ -245,31 +262,55 @@ namespace WPFAcademyMVVMFinal.ViewModels
             {
                 studentExamsSEVM = CurrentStudentExamSEVM;
             }
-                studentExamsSEVM.Mark = MarkSEVM;
-                studentExamsSEVM.HasCheated = HasCheatedSEVM;
 
-            //}
+            var nota = 0.0;
 
-            if (CurrentStudentSEVM != null)
+            if (double.TryParse(MarkTextSEVM.Replace(".", ","), out nota)) 
             {
-                studentExamsSEVM.StudentId = student.Id;
-                
-
-                if (CurrentExamSEVM != null)
+                if (nota >= 0 && nota <= 10)
                 {
+                    MarkSEVM = nota;
+                    studentExamsSEVM.Mark = MarkSEVM;
+                    studentExamsSEVM.HasCheated = HasCheatedSEVM;
 
-                    studentExamsSEVM.ExamId = exam.Id;
+
+
+                    if (CurrentStudentSEVM != null)
+                    {
+                        studentExamsSEVM.StudentId = student.Id;
+
+
+                        if (CurrentExamSEVM != null)
+                        {
+
+                            studentExamsSEVM.ExamId = exam.Id;
+                        }
+                    }
+
+                    studentExamsSEVM.Save();
+
+                    ErrorsList = studentExamsSEVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();  //Nou
+
+                    if (CurrentStudentSEVM != null || CurrentStudentExamSEVM != null)
+                    {
+                        GetStudentExamsSEVM();
+                        MarkTextSEVM = "";
+                    }
+
                 }
+                else
+                {
+                    MarkTextSEVM = "La nota no es correcta";
+                }
+
+
             }
 
-            studentExamsSEVM.Save();
-
-            ErrorsList = studentExamsSEVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();  //Nou
-
-            if (CurrentStudentSEVM != null || CurrentStudentExamSEVM != null)
+            else
             {
-                GetStudentExamsSEVM();
+                MarkTextSEVM = "La nota no es correcta";
             }
+
 
             CurrentStudentSEVM = null;
             _currentExamSEVM = null;
@@ -284,11 +325,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             isEdit = false;
         }
-
-
-
-
-
 
 
 
@@ -384,12 +420,23 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public void SelExamSEVM()  //OK Funciona bien
         {
             Exam exam = new Exam();
+            if (CurrentStudentSEVM==null)
+            {
+                NameSEVM = "No has seleccionado alumno";
+                MarkTextSEVM = "";
+            }
 
-            exam = CurrentExamSEVM;
+            else
+            {
+                exam = CurrentExamSEVM;
 
-            TitleSEVM = CurrentExamSEVM.Title;
-            SubjectNameSEVM = CurrentExamSEVM.Subject.Name;
-            DateSEVM = CurrentExamSEVM.Date;
+                TitleSEVM = CurrentExamSEVM.Title;
+                SubjectNameSEVM = CurrentExamSEVM.Subject.Name;
+                DateSEVM = CurrentExamSEVM.Date;
+                MarkTextSEVM = "";
+
+            }
+
         }
 
         public void GetStudentExamsSEVM()  //  OK funciona perfecto !!.

@@ -40,7 +40,7 @@
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="175,11,0,0" Grid.Row="6" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="1.528,0.544"/>
         <TextBox Text="{Binding DateSEVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="221,11,0,0" VerticalAlignment="Top" Width="154" Height="25" RenderTransformOrigin="0.5,1.162" IsEnabled="False" Grid.Column="1"/>
         <Label Content="Nota Examen" Grid.Row="6" HorizontalAlignment="Left" Margin="12,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.013,0.561"/>
-        <TextBox Text="{Binding MarkSEVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="98,55,0,0" VerticalAlignment="Top" Width="190" Height="25" RenderTransformOrigin="0.5,1.162"/>
+        <TextBox Text="{Binding MarkTextSEVM}" Grid.Row="6" HorizontalAlignment="Left" Margin="98,55,0,0" VerticalAlignment="Top" Width="190" Height="25" RenderTransformOrigin="0.5,1.162"/>
 
         <Grid Background="#FFE5E5E5" Grid.Row="6" Grid.Column="0" Margin="0,164,0,5" >
             <DataGrid x:Name="SubjectsMGVMDataGrid" ItemsSource="{Binding ExamsListSEVM}" SelectedItem="{Binding CurrentExamSEVM}" Margin="20,-60,10,40" AutoGenerateColumns="False" >
