@@ -238,10 +238,18 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
             GetSubjectsToStudent();
             List<string> SubjectsNameListEV = new List<string>();
+            var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
+
             foreach (StudentSubject subj in SubjectsByStudentList)
             {
-                var name = subj.Subject.Name;
-                SubjectsNameListEV.Add(name);
+                var studentSubject = new StudentSubject();  //OJO AQUI
+                var subject = new Subject();
+                subject = repo.QueryAll().FirstOrDefault(x=> x.Id==subj.SubjectId);
+                //subject.Name = studentSubject.Subject.Name; 
+
+
+                //var name = subject.Name;
+                SubjectsNameListEV.Add(subject.Name);
             }
             return SubjectsNameListEV;
         }

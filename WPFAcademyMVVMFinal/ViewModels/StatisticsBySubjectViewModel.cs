@@ -15,6 +15,12 @@ namespace WPFAcademyMVVMFinal.ViewModels
         {
             LoadDataByNameCommand = new RouteCommand(LoadDataByNameEV);
             GetSubjectByStudentsEVCommand = new RouteCommand(GetSubjectByStudents);
+            GetStudentExamsBySubjectCommand = new RouteCommand(GetStudentExamsBySubjectAndExam);
+            AvgMarkSVMCommand = new RouteCommand(AvgMarkSVM);
+            MaxMarkSVMCommand = new RouteCommand(MaxMarkSVM);
+            MinMarkSVMCommand = new RouteCommand(MinMarkSVM);
+
+
 
 
         }
@@ -22,6 +28,12 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         public ICommand LoadDataByNameCommand { get; set; }
         public ICommand GetSubjectByStudentsEVCommand { get; set; }
+        public ICommand GetStudentExamsBySubjectCommand { get; set; }
+        public ICommand AvgMarkSVMCommand { get; set; }
+        public ICommand MaxMarkSVMCommand { get; set; }
+        public ICommand MinMarkSVMCommand { get; set; }
+
+
 
 
 
@@ -76,6 +88,39 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 OnPropertyChanged();
             }
         }
+
+
+        private string _errorsSVM;
+        public string ErrorsSVM
+        {
+            get
+            {
+                return _errorsSVM;
+            }
+            set
+            {
+                _errorsSVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private double _markSVM;
+        public double MarkSVM
+        {
+            get
+            {
+                return _markSVM;
+            }
+            set
+            {
+                _markSVM = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+
 
 
 
@@ -155,6 +200,21 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         }
 
+        List<StudentExam> _studentExamsBySubjectList;
+        public List<StudentExam> StudentExamsBySubjectList
+        {
+            get
+            {
+                return _studentExamsBySubjectList;
+            }
+            set
+            {
+                _studentExamsBySubjectList = value;
+                OnPropertyChanged();
+            }
+
+        }
+
 
 
 
@@ -196,8 +256,18 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         public void GetExamsSVM()  //NO TOCAR
         {
-            var repo = Subject.DepCon.Resolve<IRepository<Exam>>();
-            ExamsListEV = repo.QueryAll().ToList();
+            var repoExams = Subject.DepCon.Resolve<IRepository<Exam>>();
+            if (CurrentSubjectNameEVM == null)   //nou
+                ExamsListEV = repoExams.QueryAll().ToList();
+
+            //nou
+            else
+            {
+                GetSubjectsEV();
+                CurrentSubjectEVM = SubjectsListEV.FirstOrDefault(x => x.Name == CurrentSubjectNameEVM);
+
+                ExamsListEV = repoExams.QueryAll().Where(x => x.SubjectId == CurrentSubjectEVM.Id).ToList();
+            }
         }
 
 
@@ -212,6 +282,125 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
             return examsNameListEV;
         }
+
+
+        public void GetStudentExamsBySubjectAndExam()
+        {
+            ErrorsSVM = "";
+            var repo = Subject.DepCon.Resolve<IRepository<StudentExam>>();
+            List<StudentExam> StudentExamsList = new List<StudentExam>();
+            StudentExamsList = repo.QueryAll().ToList();
+            GetExamsSVM();
+
+            if (CurrentExamNameEVM !=null )
+            {
+                CurrentExamEV = ExamsListEV.FirstOrDefault(x => x.Title == CurrentExamNameEVM);
+
+                StudentExamsBySubjectList = StudentExamsList.FindAll(x => x.ExamId == CurrentExamEV.Id).ToList();
+
+            }
+
+            else
+                ErrorsSVM = "No hay ningún Examen seleccionado";
+        }
+
+
+
+        #region  Statistics
+
+        bool exams = false;
+
+        public void AvgMarkSVM()
+        {
+            MarkSVM = 0;
+            var marksList = new List<double>();
+            marksList = MarksListSVM();
+
+            if (marksList == null) { }
+
+            else
+                MarkSVM = marksList.Average();
+
+        }
+
+        public void MaxMarkSVM()
+        {
+            MarkSVM = 0;
+            var marksList = new List<double>();
+            marksList = MarksListSVM();
+
+            if (marksList == null) { }
+
+            else
+                MarkSVM = marksList.Max();
+
+        }
+
+
+        public void MinMarkSVM()
+        {
+            MarkSVM = 0;
+            var marksList = new List<double>();
+            marksList = MarksListSVM();
+
+            if (marksList == null) { }
+
+            else
+                MarkSVM = marksList.Min();
+
+        }
+
+
+        public List<double> MarksListSVM()
+        {
+            ErrorsSVM = "";
+            //if (exams)
+            //{
+                
+
+                if (CurrentExamNameEVM != null)
+                {
+                    
+                    
+                        var marksList = new List<double>();
+
+                        foreach (StudentExam stuEx in StudentExamsBySubjectList)
+                        {
+                            marksList.Add(stuEx.Mark);
+                        }
+
+                        return marksList;
+
+                    
+
+                    //else
+                    //{
+                    //    var marksList = new List<double>();
+
+                    //    foreach (StudentExam stuEx in StudentExamsBySubjectList) //OJO REVISAR
+                    //    {
+                    //        marksList.Add(stuEx.Mark);
+                    //    }
+
+                    //    return marksList;
+                    //}
+
+                }
+                else
+                {
+                    ErrorsSVM = "No hay ningún Examen seleccionado";
+                    return null;
+                }
+            //}
+
+            //else
+            //{
+            //    ErrorsSVM = "No hay exámenes para calcular";
+            //    return null;
+            //}
+        }
+        #endregion
+
 
         //public void GetExamsNameSVM()  //OK Funciona No tocar !!!!
         //{

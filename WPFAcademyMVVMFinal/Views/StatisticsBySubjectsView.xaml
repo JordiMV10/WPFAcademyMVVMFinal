@@ -20,7 +20,7 @@
 
         <Label Content="Exam" HorizontalAlignment="Left" Margin="85,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
         <ComboBox x:Name="ComboBoxExams"   HorizontalAlignment="Left" Margin="145,50,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding ExamsNameListEV}" DataContext="{Binding Mode=OneWay}" SelectedItem="{Binding CurrentExamNameEVM}" />
-        <Button  Content="FIND StudentExams" Command="{Binding GetStudentExamsSVMCommand}"      HorizontalAlignment="Left" Margin="350,50,0,0" VerticalAlignment="Top" Height="25" FontWeight="Normal" Width="115"/>
+        <Button  Content="FIND StudentExams" Command="{Binding GetStudentExamsBySubjectCommand}"      HorizontalAlignment="Left" Margin="350,50,0,0" VerticalAlignment="Top" Height="25" FontWeight="Normal" Width="115"/>
 
 
         <Grid Background="#FFE5E5E5"  Margin="5,90,480,5" >
@@ -36,14 +36,14 @@
         </Grid>
 
         <Grid Background="#FFE5E5E5"  Margin="315,155,20,10" >
-            <DataGrid  ItemsSource="{Binding ExamsListSEVM}" SelectedItem="{Binding CurrentExamSEVM}" Margin="10,10,10,30" AutoGenerateColumns="False" >
+            <DataGrid  ItemsSource="{Binding StudentExamsBySubjectList}"  Margin="10,10,10,30" AutoGenerateColumns="False" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="DNI"  Binding="{Binding Exam.Title}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Name"  Binding="{Binding  Mark}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Title"  Binding="{Binding Title}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Date"  Binding="{Binding  Date}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Mark"  Binding="{Binding  Id}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="IdStudentExam"  Binding="{Binding  Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="DNI"  Binding="{Binding Student.Dni}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name"  Binding="{Binding  Student.Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Title"  Binding="{Binding Exam.Title}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Mark"  Binding="{Binding  Mark}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date"  Binding="{Binding  Exam.Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="IdStudentExam"  Binding="{Binding Id}"></DataGridTextColumn>
                 </DataGrid.Columns>
 
             </DataGrid>
