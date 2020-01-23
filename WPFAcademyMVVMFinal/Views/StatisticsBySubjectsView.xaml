@@ -17,7 +17,7 @@
         <Button  Command="{Binding LoadDataByNameCommand}"    Content="Load DATA"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="62" FontWeight="Normal" Width="70"/>
 
         <Button  Command="{Binding GetSubjectByStudentsEVCommand}"    Content="FIND Students"  HorizontalAlignment="Left" Margin="350,10,0,0" VerticalAlignment="Top" Height="25" FontWeight="Normal" Width="85"/>
-        <Button  Command="{Binding ClearCurrentEVCommand}"    Content="CLEAR Selection"  HorizontalAlignment="Left" Margin="450,10,0,0" VerticalAlignment="Top" Height="25" FontWeight="Normal" Width="90"/>
+        <Button      Content="CLEAR Selection"  HorizontalAlignment="Left" Margin="450,10,0,0" VerticalAlignment="Top" Height="25" FontWeight="Normal" Width="90" Click="ClearSelection"/>
 
 
         <Label Content="Exam" HorizontalAlignment="Left" Margin="85,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>

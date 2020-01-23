@@ -224,8 +224,9 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         public void ClearCurrentSVM()
         {
-            CurrentSubjectNameEVM = "";
-            CurrentExamNameEVM = "";
+            CurrentSubjectNameEVM =" -1";
+            CurrentExamNameEVM = "-1";
+            
         }
 
 
@@ -343,7 +344,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         #region  Statistics
 
-        bool exams = false;
+        //bool exams = false;
 
         public void AvgMarkSVM()
         {
@@ -389,58 +390,36 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public List<double> MarksListSVM()
         {
             ErrorsSVM = "";
-            //if (exams)
-            //{
-                
 
-                if (CurrentExamNameEVM != null)
+            if (CurrentExamNameEVM != null)
+            {
+
+
+                var marksList = new List<double>();
+
+                foreach (StudentExam stuEx in StudentExamsBySubjectList)
                 {
-                    
-                    
-                        var marksList = new List<double>();
-
-                        foreach (StudentExam stuEx in StudentExamsBySubjectList)
-                        {
-                            marksList.Add(stuEx.Mark);
-                        }
-
-                        return marksList;
-
-                    
-
-                    //else
-                    //{
-                    //    var marksList = new List<double>();
-
-                    //    foreach (StudentExam stuEx in StudentExamsBySubjectList) //OJO REVISAR
-                    //    {
-                    //        marksList.Add(stuEx.Mark);
-                    //    }
-
-                    //    return marksList;
-                    //}
-
+                    marksList.Add(stuEx.Mark);
                 }
-                else
+
+                return marksList;
+            }
+
+
+            else
+            {
+                var marksList = new List<double>();
+
+                foreach (StudentExam stuEx in StudentExamsBySubjectList) 
                 {
-                    ErrorsSVM = "No hay ningún Examen seleccionado";
-                    return null;
+                    marksList.Add(stuEx.Mark);
                 }
-            //}
 
-            //else
-            //{
-            //    ErrorsSVM = "No hay exámenes para calcular";
-            //    return null;
-            //}
+                return marksList;
+            }
+
         }
         #endregion
-
-
-        //public void GetExamsNameSVM()  //OK Funciona No tocar !!!!
-        //{
-        //    ExamsNameListEV = GetExamsByNameSVM();
-        //}
 
 
 

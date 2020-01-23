@@ -22,5 +22,11 @@ namespace WPFAcademyMVVMFinal.Views
         {
             InitializeComponent();
         }
+
+        private void ClearSelection(object sender, RoutedEventArgs e)
+        {
+            ComboBoxSubjects.SelectedIndex = -1;
+            ComboBoxExams.SelectedIndex = -1;
+        }
     }
 }

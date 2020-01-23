@@ -97,7 +97,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         private Subject _currentSubjectEVM;
-        public Subject CurrentSubjectEVM  //Meu ok funciona !!
+        public Subject CurrentSubjectEVM  
         {
             get { return _currentSubjectEVM; }
             set
@@ -184,14 +184,14 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
 
-        public void GetSubjectsEV()  //NO TOCAR
+        public void GetSubjectsEV()  
         {
             var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
             SubjectsListEV = repo.QueryAll().ToList();
         }
 
 
-        public List<string> GetSubjectsByNameEV()  //NO TOCAR
+        public List<string> GetSubjectsByNameEV()  
         {
             GetSubjectsEV();
             List<string> SubjectsNameListEV = new List<string>();
@@ -204,13 +204,13 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void GetSubjectsNameEV()  //OK Funciona No tocar !!!!
+        public void GetSubjectsNameEV()  
         {
             SubjectsNameListEV = GetSubjectsByNameEV();
         }
 
         bool isEdit = false;
-        public void SaveExamEV()  //OK Funciona bien !!
+        public void SaveExamEV()  
         {
             Exam exam = new Exam();
             Subject subject = new Subject();
@@ -237,7 +237,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         }
 
-        public void GetExamsEV()  //OK Funciona bien
+        public void GetExamsEV()  
         {
             Exam exam = new Exam();
             var repo = Student.DepCon.Resolve<IRepository<Exam>>();
@@ -245,11 +245,11 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public Exam SaveExamNameEV(string name)   //Meu : Funciona OK !! Me devuelve exam completo!! .
+        public Exam SaveExamNameEV(string name)   
         {
             Subject subject = new Subject();
             var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
-            subject = repo.QueryAll().FirstOrDefault(s => s.Name == name);   //Funciona bien, recupero bien el subject
+            subject = repo.QueryAll().FirstOrDefault(s => s.Name == name);  
 
             Exam exam = new Exam();
             exam.SubjectId = subject.Id;
@@ -261,7 +261,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         }
 
-        public void DelExamEV()    //Meu : Funciona OK !!
+        public void DelExamEV()    
         {
             Exam exam = new Exam();
 
@@ -280,7 +280,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
                 exam.Delete();
 
-                //ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
                 GetExamsEV();
 
@@ -291,7 +290,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         }
 
-        public void EditExamEV()   //Meu : Funciona ok. 
+        public void EditExamEV()    
         {
 
             Exam exam = new Exam();

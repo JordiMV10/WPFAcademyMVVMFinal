@@ -1,5 +1,6 @@
 ﻿using Academy.Lib.Models;
 using Common.Lib.Core.Context;
+using Common.Lib.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -133,24 +134,38 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
-
-        bool isEdit = false;
-
-        public void SaveStudent()
+        
+        public void ChairStringToInt()
         {
-            var chair = 0;
-
-            if (!(int.TryParse(ChairTextVM, out chair)))
+            var chairVR = Student.ValidateChairNumber(ChairTextVM);
+            if (!chairVR.IsSuccess)
             {
-                ChairTextVM = "La silla introducida no es correcta";
+                ErrorsList = chairVR.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+                CurrentStudent = null;
                 DniVM = "";
                 NameVM = "";
+                ChairTextVM = "";
                 EmailVM = "";
             }
 
             else
             {
-                ChairNumberVM = chair;
+                ChairNumberVM = chairVR.ValidatedResult;
+            }
+
+        }
+
+
+
+        bool isEdit = false;
+
+        public void SaveStudent()
+        {
+
+            ChairStringToInt();
+
+            if (ChairNumberVM != 0)
+            {
                 Student student = new Student()
                 {
                     Dni = DniVM,
@@ -178,7 +193,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 EmailVM = "";
 
             }
-
 
             isEdit = false;
         }

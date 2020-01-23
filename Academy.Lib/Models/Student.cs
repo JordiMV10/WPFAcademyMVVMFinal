@@ -161,7 +161,7 @@ namespace Academy.Lib.Models
             if (!isConversionOk)
             {
                 output.IsSuccess = false;
-                output.Errors.Add($"no se puede convertir {chairNumber} en número");
+                output.Errors.Add($"no se puede convertir {chairNumberText} en número");
             }
 
             #endregion
