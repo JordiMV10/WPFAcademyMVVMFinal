@@ -196,7 +196,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
 
-        List<ErrorMessage> _errorsList;  //Nou
+        List<ErrorMessage> _errorsList;  
         public List<ErrorMessage> ErrorsList
         {
             get
@@ -242,14 +242,10 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         bool isEdit = false;
 
-        public void SaveStudentExamsSEVM()   //Pdte probar funcionamiento
+        public void SaveStudentExamsSEVM()   
         {
 
             StudentExam studentExamsSEVM = new StudentExam();
-            //{
-            //    Mark = MarkSEVM,
-            //    HasCheated = HasCheatedSEVM
-            //};
 
             Exam exam = new Exam();
             Student student = new Student();
@@ -272,7 +268,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
                     MarkSEVM = nota;
                     studentExamsSEVM.Mark = MarkSEVM;
                     studentExamsSEVM.HasCheated = HasCheatedSEVM;
-
 
 
                     if (CurrentStudentSEVM != null)
@@ -328,19 +323,26 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
 
-        public void EditStudentExamsSEVM()  //Pdte. Repasar y probar mejor. parece funciona OK
+        public void EditStudentExamsSEVM()  
         {
-            StudentExam studentExam = new StudentExam();
+            if (CurrentStudentSEVM != null)
+            {
+                StudentExam studentExam = new StudentExam();
 
-            DniSEVM = CurrentStudentExamSEVM.Student.Dni;
-            NameSEVM = CurrentStudentExamSEVM.Student.Name;
-            TitleSEVM = CurrentStudentExamSEVM.Exam.Text;
-            SubjectNameSEVM = CurrentStudentExamSEVM.Exam.Subject.Name;
-            DateSEVM = CurrentStudentExamSEVM.Exam.Date;
-            MarkSEVM = CurrentStudentExamSEVM.Mark;
-            HasCheatedSEVM = CurrentStudentExamSEVM.HasCheated;
+                DniSEVM = CurrentStudentExamSEVM.Student.Dni;
+                NameSEVM = CurrentStudentExamSEVM.Student.Name;
+                TitleSEVM = CurrentStudentExamSEVM.Exam.Text;
+                SubjectNameSEVM = CurrentStudentExamSEVM.Exam.Subject.Name;
+                DateSEVM = CurrentStudentExamSEVM.Exam.Date;
+                MarkTextSEVM = CurrentStudentExamSEVM.Mark.ToString();
 
-            CurrentExamSEVM = CurrentStudentExamSEVM.Exam;
+                HasCheatedSEVM = CurrentStudentExamSEVM.HasCheated;
+
+                CurrentExamSEVM = CurrentStudentExamSEVM.Exam;
+
+            }
+            else
+                NameSEVM = "No has seleccionado ningún Student";
 
         }
 

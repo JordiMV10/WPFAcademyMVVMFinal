@@ -19,6 +19,8 @@ namespace WPFAcademyMVVMFinal.ViewModels
             AvgMarkSVMCommand = new RouteCommand(AvgMarkSVM);
             MaxMarkSVMCommand = new RouteCommand(MaxMarkSVM);
             MinMarkSVMCommand = new RouteCommand(MinMarkSVM);
+            ClearCurrentEVCommand = new RouteCommand(ClearCurrentSVM);
+
 
 
 
@@ -32,6 +34,10 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public ICommand AvgMarkSVMCommand { get; set; }
         public ICommand MaxMarkSVMCommand { get; set; }
         public ICommand MinMarkSVMCommand { get; set; }
+        public ICommand ClearCurrentEVCommand { get; set; }
+
+
+        
 
 
 
@@ -216,6 +222,13 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
+        public void ClearCurrentSVM()
+        {
+            CurrentSubjectNameEVM = "";
+            CurrentExamNameEVM = "";
+        }
+
+
 
 
         public void GetSubjectsEV()  //NO TOCAR
@@ -247,10 +260,19 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         public void GetSubjectByStudents()
         {
-            GetSubjectsEV();
-            CurrentSubjectEVM = SubjectsListEV.FirstOrDefault(x => x.Name == CurrentSubjectNameEVM);
-            var repo = Subject.DepCon.Resolve<IRepository<StudentSubject>>();
-            SubjectByStudentsList = repo.QueryAll().Where (x=> x.SubjectId==CurrentSubjectEVM.Id).ToList();
+            ErrorsSVM = "";
+            if (CurrentSubjectNameEVM != null)
+            {
+                GetSubjectsEV();
+                CurrentSubjectEVM = SubjectsListEV.FirstOrDefault(x => x.Name == CurrentSubjectNameEVM);
+                var repo = Subject.DepCon.Resolve<IRepository<StudentSubject>>();
+                SubjectByStudentsList = repo.QueryAll().Where(x => x.SubjectId == CurrentSubjectEVM.Id).ToList();
+
+            }
+            else
+            {
+                ErrorsSVM = "No has seleccionado ninguna asignatura";
+            }
         }
 
 
@@ -292,16 +314,29 @@ namespace WPFAcademyMVVMFinal.ViewModels
             StudentExamsList = repo.QueryAll().ToList();
             GetExamsSVM();
 
-            if (CurrentExamNameEVM !=null )
+            if (CurrentSubjectNameEVM !=null )
             {
-                CurrentExamEV = ExamsListEV.FirstOrDefault(x => x.Title == CurrentExamNameEVM);
+                GetSubjectsEV();
+                CurrentSubjectEVM = SubjectsListEV.FirstOrDefault(x => x.Name == CurrentSubjectNameEVM);
 
-                StudentExamsBySubjectList = StudentExamsList.FindAll(x => x.ExamId == CurrentExamEV.Id).ToList();
+                if (CurrentExamNameEVM != null)
+                {
+                    CurrentExamEV = ExamsListEV.FirstOrDefault(x => x.Title == CurrentExamNameEVM);
+
+                    StudentExamsBySubjectList = StudentExamsList.FindAll(x => x.ExamId == CurrentExamEV.Id).ToList();
+
+                }
+
+                else
+                {
+
+                    StudentExamsBySubjectList = StudentExamsList.FindAll(x => x.Exam.SubjectId == CurrentSubjectEVM.Id);
+                }
 
             }
 
             else
-                ErrorsSVM = "No hay ningún Examen seleccionado";
+                ErrorsSVM = "No hay ningúna Asignatura seleccionada";
         }
 
 

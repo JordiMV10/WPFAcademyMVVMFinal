@@ -91,7 +91,7 @@
 
         <Label Content="Error" Grid.Column="1" HorizontalAlignment="Left" Margin="84,1,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <DataGrid Grid.Column="1" ItemsSource="{Binding ErrorsList}" Margin="125,10,10,3" Grid.RowSpan="5"/>
-        <CheckBox Content="Has cheated?"  HorizontalAlignment="Left" Margin="355,59,0,0" Grid.Row="6" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="107"/>
+        <CheckBox Content="Has cheated?"   HorizontalAlignment="Left" Margin="355,59,0,0" Grid.Row="6" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="107" IsChecked="{Binding HasCheatedSEVM}"/>
         <Button  Command="{Binding SaveStudentExamsSEVMCommand}"    Content="Guardar" Grid.Row="6" HorizontalAlignment="Left" Margin="115,55,0,0" VerticalAlignment="Top" Height="25" FontWeight="Bold" Grid.Column="1" Width="160"/>
 
 
