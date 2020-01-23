@@ -240,70 +240,74 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        bool isEdit = false;
-
-        public void SaveStudentExamsSEVM()   
+        public void MarkStringToDouble()
         {
-
-            StudentExam studentExamsSEVM = new StudentExam();
-
-            Exam exam = new Exam();
-            Student student = new Student();
-            ErrorsList = new List<ErrorMessage>();
-
-
-            exam = CurrentExamSEVM;
-            student = CurrentStudentSEVM;
-            if (CurrentStudentExamSEVM != null)
+            StudentExam studentExam = new StudentExam();
+            var markVR = studentExam.ValidateMark(MarkTextSEVM);
+            if (!markVR.IsSuccess)
             {
-                studentExamsSEVM = CurrentStudentExamSEVM;
-            }
-
-            var nota = 0.0;
-
-            if (double.TryParse(MarkTextSEVM.Replace(".", ","), out nota)) 
-            {
-                if (nota >= 0 && nota <= 10)
-                {
-                    MarkSEVM = nota;
-                    studentExamsSEVM.Mark = MarkSEVM;
-                    studentExamsSEVM.HasCheated = HasCheatedSEVM;
-
-
-                    if (CurrentStudentSEVM != null)
-                    {
-                        studentExamsSEVM.StudentId = student.Id;
-
-
-                        if (CurrentExamSEVM != null)
-                        {
-
-                            studentExamsSEVM.ExamId = exam.Id;
-                        }
-                    }
-
-                    studentExamsSEVM.Save();
-
-                    ErrorsList = studentExamsSEVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();  //Nou
-
-                    if (CurrentStudentSEVM != null || CurrentStudentExamSEVM != null)
-                    {
-                        GetStudentExamsSEVM();
-                        MarkTextSEVM = "";
-                    }
-
-                }
-                else
-                {
-                    MarkTextSEVM = "La nota no es correcta";
-                }
-
-
+                ErrorsList = markVR.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+                CurrentStudentSEVM = null;
+                CurrentExamSEVM = null;
+                DniSEVM = "";
+                NameSEVM = "";
+                MarkTextSEVM = "";
+                HasCheatedSEVM = false;
             }
 
             else
             {
-                MarkTextSEVM = "La nota no es correcta";
+                MarkSEVM = markVR.ValidatedResult;
+            }
+
+        }
+
+
+
+        bool isEdit = false;
+
+        public void SaveStudentExamsSEVM()   
+        {
+            MarkStringToDouble();
+            StudentExam studentExamsSEVM = new StudentExam();
+
+            if (MarkSEVM != 0)
+            {
+
+                Exam exam = new Exam();
+                Student student = new Student();
+                ErrorsList = new List<ErrorMessage>();
+
+
+                exam = CurrentExamSEVM;
+                student = CurrentStudentSEVM;
+                if (CurrentStudentExamSEVM != null)
+                {
+                    studentExamsSEVM = CurrentStudentExamSEVM;
+                }
+
+                studentExamsSEVM.Mark = MarkSEVM;
+                studentExamsSEVM.HasCheated = HasCheatedSEVM;
+                if (CurrentStudentSEVM != null)
+                {
+                    studentExamsSEVM.StudentId = student.Id;
+
+                    if (CurrentExamSEVM != null)
+                    {
+                        studentExamsSEVM.ExamId = exam.Id;
+                    }
+                }
+
+                studentExamsSEVM.Save();
+
+                ErrorsList = studentExamsSEVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();  //Nou
+
+                if (CurrentStudentSEVM != null || CurrentStudentExamSEVM != null)
+                {
+                    GetStudentExamsSEVM();
+                    MarkTextSEVM = "";
+                }
+
             }
 
 

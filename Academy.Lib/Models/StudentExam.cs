@@ -46,7 +46,7 @@ namespace Academy.Lib.Models
         }
 
 
-        public SaveResult<StudentExam> Save() //Pdte verificar si funciona
+        public SaveResult<StudentExam> Save() 
         {
             var saveResult = base.Save<StudentExam>();
 
@@ -54,14 +54,14 @@ namespace Academy.Lib.Models
         }
 
 
-        public DeleteResult<StudentExam> Delete()  //Pdte verificar si funciona
+        public DeleteResult<StudentExam> Delete()  
         {
             var deleteResult = base.Delete<StudentExam>();
 
             return deleteResult;
         }
 
-        public List<StudentExam> StudentByExams(Guid idStudent)   //Pdte verificar si funciona
+        public List<StudentExam> StudentByExams(Guid idStudent)   
         {
             var repo = DepCon.Resolve<IRepository<StudentExam>>();
             var entityId = repo.QueryAll().Where(e => e.StudentId == idStudent).ToList();
@@ -142,15 +142,8 @@ namespace Academy.Lib.Models
             #region check format conversion
 
             isConversionOk = double.TryParse(markText.Replace(".", ","), out mark);
-            //Pdte ajustar la coma de las notas
-            //OJO, intentar aplicar : 
-            //var nota = 0.0;
 
-            //if (double.TryParse(notaText.Replace(".", ","), out nota))
-
-
-
-                if (!isConversionOk)
+            if (!isConversionOk)
             {
                 output.IsSuccess = false;
                 output.Errors.Add($"no se puede convertir {markText} en número");
@@ -158,13 +151,22 @@ namespace Academy.Lib.Models
             #endregion
 
             if (output.IsSuccess)
-                output.ValidatedResult = mark;
+            {
+                if (mark >= 0 && mark <= 10) 
+                {
+                    output.ValidatedResult = mark;
+                }
+                else
+                {
+                    output.IsSuccess = false;
+                    output.Errors.Add("La nota no es correcta");
 
-
-
-
+                }
+            }
             return output;
         }
+
+
         public ValidationResult<string> ValidateStudentSubject(Guid studentId, Guid examId, Guid currentId = default)
         {
             var output = new ValidationResult<string>()
@@ -176,7 +178,9 @@ namespace Academy.Lib.Models
             var studentBySubjects = new List<StudentSubject>();
             studentBySubjects = studentSubject.StudentBySubjects(studentId);
             var exam = new Exam();
+
             exam = FindExam(ExamId);
+
             if (exam ==null)
             {
                 output.IsSuccess = false;
@@ -193,7 +197,6 @@ namespace Academy.Lib.Models
                 if (currentId != default)
                 {
                     output.IsSuccess = true;
-
                 }
 
                 //On Create
@@ -203,9 +206,7 @@ namespace Academy.Lib.Models
                     {
                         output.IsSuccess = false;
                         output.Errors.Add("el Student no puede estar vacío");
-
                     }
-
 
                     else
                     {
@@ -213,25 +214,18 @@ namespace Academy.Lib.Models
                         {
                             output.IsSuccess = false;
                             output.Errors.Add("la Asignatura no puede estar vacío");
-
                         }
-
 
                         else
                         {
-
                             if (studentSubject == null)
                             {
                                 output.IsSuccess = false;
                                 output.Errors.Add("El Student no está matriculado de la Asignatura");
                             }
-
                         }
                     }
-
                 }
-
-
             }
 
             return output;
@@ -255,7 +249,6 @@ namespace Academy.Lib.Models
             if (currentId != default)
             {
                 output.IsSuccess = true;
-
             }
 
             //On Create
@@ -265,9 +258,7 @@ namespace Academy.Lib.Models
                 {
                     output.IsSuccess = false;
                     output.Errors.Add("El Student no puede estar vacío");
-
                 }
-
 
                 else
                 {
@@ -275,9 +266,7 @@ namespace Academy.Lib.Models
                     {
                         output.IsSuccess = false;
                         output.Errors.Add("El Examen no puede estar vacío");
-
                     }
-
 
                     else
                     {
@@ -288,11 +277,8 @@ namespace Academy.Lib.Models
                             output.IsSuccess = false;
                             output.Errors.Add("Ya está registrado este Examen");
                         }
-
                     }
                 }
-
-
             }
 
             return output;

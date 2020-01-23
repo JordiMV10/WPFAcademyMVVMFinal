@@ -45,11 +45,12 @@
         </Grid>
 
         <Grid Background="#FFE5E5E5"  Margin="315,155,20,10" >
-            <DataGrid  ItemsSource="{Binding ExamsListSEVM}" SelectedItem="{Binding CurrentExamSEVM}" Margin="10,10,10,30" AutoGenerateColumns="False" >
+            <DataGrid  ItemsSource="{Binding MaxMinListSVM}" SelectedItem="{Binding CurrentExamSEVM}" Margin="10,10,10,30" AutoGenerateColumns="False" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title"  Binding="{Binding Title}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Date"  Binding="{Binding  Date}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Mark"  Binding="{Binding  Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Title"  Binding="{Binding Exam.Title}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Subject"  Binding="{Binding Exam.Subject.Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date"  Binding="{Binding  Exam.Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Mark"  Binding="{Binding  Mark}"></DataGridTextColumn>
                     <DataGridTextColumn Header="IdExam"  Binding="{Binding  Id}"></DataGridTextColumn>
                 </DataGrid.Columns>
 

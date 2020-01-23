@@ -222,6 +222,27 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
+        List<StudentExam> _studentExamsList;
+        public List<StudentExam> StudentExamsList
+        {
+            get
+            {
+                return _studentExamsList;
+            }
+            set
+            {
+                _studentExamsList = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+
+
+
+
+
+
         public void ClearCurrentSVM()
         {
             CurrentSubjectNameEVM =" -1";
@@ -355,20 +376,28 @@ namespace WPFAcademyMVVMFinal.ViewModels
             if (marksList == null) { }
 
             else
+            {
                 MarkSVM = marksList.Average();
+                StudentExamsBySubjectList.Clear();
+            }
 
         }
 
         public void MaxMarkSVM()
         {
             MarkSVM = 0;
+
             var marksList = new List<double>();
             marksList = MarksListSVM();
 
             if (marksList == null) { }
 
             else
+            {
                 MarkSVM = marksList.Max();
+                StudentExamsBySubjectList = StudentExamsBySubjectList.FindAll(x => x.Mark == MarkSVM).ToList();
+
+            }
 
         }
 
@@ -376,20 +405,26 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public void MinMarkSVM()
         {
             MarkSVM = 0;
+
             var marksList = new List<double>();
             marksList = MarksListSVM();
 
             if (marksList == null) { }
 
             else
+            {
                 MarkSVM = marksList.Min();
 
+                StudentExamsBySubjectList = StudentExamsBySubjectList.FindAll(x => x.Mark == MarkSVM).ToList();
+            }
         }
 
 
         public List<double> MarksListSVM()
         {
             ErrorsSVM = "";
+            GetStudentExamsBySubjectAndExam();  //OJOOO
+
 
             if (CurrentExamNameEVM != null)
             {
@@ -408,6 +443,12 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             else
             {
+
+                var repo = Subject.DepCon.Resolve<IRepository<StudentExam>>();
+                List<StudentExam> StudentExamsList = new List<StudentExam>();
+                StudentExamsList = repo.QueryAll().ToList();
+
+
                 var marksList = new List<double>();
 
                 foreach (StudentExam stuEx in StudentExamsBySubjectList) 

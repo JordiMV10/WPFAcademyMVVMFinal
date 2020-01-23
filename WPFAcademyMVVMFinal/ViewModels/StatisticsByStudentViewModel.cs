@@ -183,6 +183,21 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
+        List<StudentExam> _maxMinListSVM;
+        public List<StudentExam> MaxMinListSVM
+        {
+            get
+            {
+                return _maxMinListSVM;
+            }
+            set
+            {
+                _maxMinListSVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         #endregion
 
         #region Métodos de Búsqueda
@@ -242,13 +257,11 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             foreach (StudentSubject subj in SubjectsByStudentList)
             {
-                var studentSubject = new StudentSubject();  //OJO AQUI
+                var studentSubject = new StudentSubject();  
                 var subject = new Subject();
+
                 subject = repo.QueryAll().FirstOrDefault(x=> x.Id==subj.SubjectId);
-                //subject.Name = studentSubject.Subject.Name; 
 
-
-                //var name = subject.Name;
                 SubjectsNameListEV.Add(subject.Name);
             }
             return SubjectsNameListEV;
@@ -320,7 +333,11 @@ namespace WPFAcademyMVVMFinal.ViewModels
             if (marksList ==null) { }
             
             else
+            {
                 MarkSVM = marksList.Average();
+                MaxMinListSVM = StudentExamsBySubjectListSVM.FindAll(x => x.Mark == MarkSVM).ToList();
+                MaxMinListSVM.Clear();
+            }
 
         }
 
@@ -333,7 +350,10 @@ namespace WPFAcademyMVVMFinal.ViewModels
             if (marksList == null) { }
 
             else
-                MarkSVM = marksList.Max() ;
+            {
+                MarkSVM = marksList.Max();
+                MaxMinListSVM = StudentExamsBySubjectListSVM.FindAll(x => x.Mark == MarkSVM).ToList();
+            }
 
         }
         
@@ -346,8 +366,11 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             if (marksList == null) { }
 
-            else
+            else 
+            {
                 MarkSVM = marksList.Min();
+                MaxMinListSVM = StudentExamsBySubjectListSVM.FindAll(x => x.Mark == MarkSVM).ToList();
+            }
 
         }
 
