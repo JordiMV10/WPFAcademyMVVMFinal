@@ -23,21 +23,16 @@
 
 
         <Grid Grid.Row="0" >
-            <!--<Button Height="30" Content="Save Exam" Command="{Binding SaveExamEVMCommand}" RenderTransformOrigin="2.496,0.667" Margin="345,21,345,99" />-->
             <Label Content="Title" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.771,-0.594" Width="78"/>
             <Label Content="Text" HorizontalAlignment="Left" Margin="22,40,0,0" VerticalAlignment="Top" Width="78"/>
             <Label Content="Date" HorizontalAlignment="Left" Margin="22,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
             <Label Content="Subject" HorizontalAlignment="Left" Margin="22,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
-
             <TextBox x:Name="TitleText" Text="{Binding TitleEVM}" HorizontalAlignment="Left" Height="23" Margin="125,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.292,0.209"/>
             <TextBox x:Name="TextText"  Text="{Binding TextEVM}" HorizontalAlignment="Left" Height="23" Margin="125,40,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195"/>
-            <!--<TextBox x:Name="DateText"  HorizontalAlignment="Left" Height="23" Margin="125,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.668,0.443"/>-->
             <DatePicker Margin="125,73,445,54" FirstDayOfWeek="Monday" SelectedDate="{Binding DateEVM}"/>
             <ComboBox x:Name="ComboBoxSubjects"  HorizontalAlignment="Left" Margin="125,100,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding SubjectsNameListEV}" DataContext="{Binding Mode=OneWay}" SelectedItem="{Binding CurrentSubjectNameEVM}" />
             <Button Content="REFRESH" Command="{Binding GetSubjectsNameEVCommand}" RenderTransformOrigin="2.496,0.667" Margin="330,100,375,28" />
-
             <Button Content="Save Exam" Command="{Binding SaveExamEVCommand}" RenderTransformOrigin="2.496,0.667" Margin="345,13,345,87" />
-
             <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
 
             <Grid Margin="480,24,10,10" Background="#FFBDC0CB">
@@ -49,12 +44,6 @@
 
         <Grid Grid.Row="1">
 
-            <!--<Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -72,7 +61,6 @@
             </DataGrid>
             <Button   Grid.Column="1" Content="Editar" Command="{Binding EditExamEVCommand}" Background="White" Margin="0,5,10,140" />
             <Button  Grid.Column="1" Content="Eliminar" Command="{Binding DelExamEVCommand}" Background="White" Margin="0,140,10,5"/>
-            <!--<Button Content="Get Exams" Command="{Binding GetSubjectsEVM2Command}" Width="151" Margin="0,255,10,5" HorizontalAlignment="Right" RenderTransformOrigin="0.602,2.571" />-->
 
         </Grid>
 

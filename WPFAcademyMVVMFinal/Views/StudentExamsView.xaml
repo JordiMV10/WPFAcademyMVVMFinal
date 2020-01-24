@@ -49,16 +49,12 @@
                     <DataGridTextColumn Header="SubjectName" Binding="{Binding Subject.Name}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Date"  Binding="{Binding  Date}"></DataGridTextColumn>
                     <DataGridTextColumn Header="IdExam"  Binding="{Binding  Id}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="IdExam"  Binding="{Binding  Id}"></DataGridTextColumn>
-
-
+                    <DataGridTextColumn Header="IdExam"  Binding="{Binding  Id}"></DataGridTextColumn>
                 </DataGrid.Columns>
-
             </DataGrid>
+            
             <Button  Content="Ver Examenes" Grid.Column="0" Command="{Binding GetExamsSEVMCommand}"  HorizontalAlignment="Left" Margin="20,0,0,10" VerticalAlignment="Bottom" FontSize="10" RenderTransformOrigin="0.895,0.422" />
             <Button Content="Seleccionar Examen" Grid.Column="0" Command="{Binding SelExamSEVMCommand}" HorizontalAlignment="Left" Margin="255,0,0,10" VerticalAlignment="Bottom" FontSize="10" Width="120" RenderTransformOrigin="0.542,-0.561"/>
-
-
 
         </Grid>
 
@@ -77,25 +73,18 @@
                         <DataGridTextColumn Header="Mark"  Binding="{Binding Mark}"></DataGridTextColumn>
                         <DataGridTextColumn Header="HasCheated?"  Binding="{Binding HasCheated}"></DataGridTextColumn>
                         <DataGridTextColumn Header="IdStudentExams"  Binding="{Binding Id }"></DataGridTextColumn>
-
-
                 </DataGrid.Columns>
             </DataGrid>
+            
             <Button Content="Editar StudentExam" Command="{Binding EditStudentExamsSEVMCommand}" HorizontalAlignment="Left" Margin="10,0,0,-25" VerticalAlignment="Bottom" RenderTransformOrigin="0.379,-0.251" FontSize="10" Width="130" Height="17"/>
-
             <Button Content="Borrar StudentExam" Command="{Binding DelStudentExamsSEVMCommand}" HorizontalAlignment="Left" Margin="0,0,0,-25" VerticalAlignment="Bottom" RenderTransformOrigin="0.379,-0.251" FontSize="10" Width="130" Grid.Column="2" Height="17"/>
 
-
         </Grid>
-
 
         <Label Content="Error" Grid.Column="1" HorizontalAlignment="Left" Margin="84,1,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <DataGrid Grid.Column="1" ItemsSource="{Binding ErrorsList}" Margin="125,10,10,3" Grid.RowSpan="5"/>
         <CheckBox Content="Has cheated?"   HorizontalAlignment="Left" Margin="355,59,0,0" Grid.Row="6" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="107" IsChecked="{Binding HasCheatedSEVM}"/>
         <Button  Command="{Binding SaveStudentExamsSEVMCommand}"    Content="Guardar" Grid.Row="6" HorizontalAlignment="Left" Margin="115,55,0,0" VerticalAlignment="Top" Height="25" FontWeight="Bold" Grid.Column="1" Width="160"/>
-
-
-
 
     </Grid>
 </UserControl>

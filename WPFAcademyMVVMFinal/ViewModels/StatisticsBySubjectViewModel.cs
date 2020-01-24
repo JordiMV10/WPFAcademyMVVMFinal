@@ -19,12 +19,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
             AvgMarkSVMCommand = new RouteCommand(AvgMarkSVM);
             MaxMarkSVMCommand = new RouteCommand(MaxMarkSVM);
             MinMarkSVMCommand = new RouteCommand(MinMarkSVM);
-            ClearCurrentEVCommand = new RouteCommand(ClearCurrentSVM);
-
-
-
-
-
         }
 
 
@@ -34,11 +28,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public ICommand AvgMarkSVMCommand { get; set; }
         public ICommand MaxMarkSVMCommand { get; set; }
         public ICommand MinMarkSVMCommand { get; set; }
-        public ICommand ClearCurrentEVCommand { get; set; }
-
-
-        
-
 
 
 
@@ -241,26 +230,14 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
 
-
-
-        public void ClearCurrentSVM()
-        {
-            CurrentSubjectNameEVM =" -1";
-            CurrentExamNameEVM = "-1";
-            
-        }
-
-
-
-
-        public void GetSubjectsEV()  //NO TOCAR
+        public void GetSubjectsEV()  
         {
             var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
             SubjectsListEV = repo.QueryAll().ToList();
         }
 
 
-        public List<string> GetSubjectsByNameEV()  //NO TOCAR
+        public List<string> GetSubjectsByNameEV()  
         {
             GetSubjectsEV();
             List<string> SubjectsNameListEV = new List<string>();
@@ -273,7 +250,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void LoadDataByNameEV()  //OK Funciona No tocar !!!!
+        public void LoadDataByNameEV()  
         {
             SubjectsNameListEV = GetSubjectsByNameEV();
             ExamsNameListEV = GetExamsByNameSVM();
@@ -298,13 +275,13 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void GetExamsSVM()  //NO TOCAR
+        public void GetExamsSVM()  
         {
             var repoExams = Subject.DepCon.Resolve<IRepository<Exam>>();
-            if (CurrentSubjectNameEVM == null)   //nou
+            if (CurrentSubjectNameEVM == null)   
                 ExamsListEV = repoExams.QueryAll().ToList();
 
-            //nou
+            
             else
             {
                 GetSubjectsEV();
@@ -315,7 +292,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public List<string> GetExamsByNameSVM()  //NO TOCAR
+        public List<string> GetExamsByNameSVM()  
         {
             GetExamsSVM();
             List<string> examsNameListEV = new List<string>();
@@ -351,7 +328,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
                 else
                 {
-
                     StudentExamsBySubjectList = StudentExamsList.FindAll(x => x.Exam.SubjectId == CurrentSubjectEVM.Id);
                 }
 
@@ -365,7 +341,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         #region  Statistics
 
-        //bool exams = false;
 
         public void AvgMarkSVM()
         {
@@ -423,13 +398,11 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public List<double> MarksListSVM()
         {
             ErrorsSVM = "";
-            GetStudentExamsBySubjectAndExam();  //OJOOO
+            GetStudentExamsBySubjectAndExam();  
 
 
             if (CurrentExamNameEVM != null)
             {
-
-
                 var marksList = new List<double>();
 
                 foreach (StudentExam stuEx in StudentExamsBySubjectList)
@@ -443,11 +416,9 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             else
             {
-
                 var repo = Subject.DepCon.Resolve<IRepository<StudentExam>>();
                 List<StudentExam> StudentExamsList = new List<StudentExam>();
                 StudentExamsList = repo.QueryAll().ToList();
-
 
                 var marksList = new List<double>();
 

@@ -29,8 +29,8 @@
                 <DataGrid ItemsSource="{Binding ErrorsList}" />
             </Grid>
             <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
-
         </Grid>
+        
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

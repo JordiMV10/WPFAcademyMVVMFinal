@@ -39,14 +39,13 @@ namespace Academy.Lib.Models
             var output = base.Validate();
 
             ValidateName(output);
-            //ValidateTeacher(output);
 
             return output;
         }
 
 
 
-        public SaveResult<StudentSubject> Save()   //OK funciona bien
+        public SaveResult<StudentSubject> Save()   
         {
             var saveResult = base.Save<StudentSubject>();
 
@@ -54,14 +53,14 @@ namespace Academy.Lib.Models
         }
 
 
-        public DeleteResult<StudentSubject> Delete()  //OK funciona bien
+        public DeleteResult<StudentSubject> Delete()  
         {
             var deleteResult = base.Delete<StudentSubject>();
 
             return deleteResult;
         }
 
-        public  List<StudentSubject> StudentBySubjects(Guid idStudent)   //Meu Funciona OK, torna llista dels IDs dels students i les ID de les seves Subjects.
+        public  List<StudentSubject> StudentBySubjects(Guid idStudent)   
         {
             var repo = DepCon.Resolve<IRepository<StudentSubject>>();
             var entityId = repo.QueryAll().Where(e => e.StudentId == idStudent).ToList();

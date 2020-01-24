@@ -16,18 +16,21 @@ namespace WPFAcademyMVVMFinal.ViewModels
             GetExamsEVCommand = new RouteCommand(GetExamsEV);
             EditExamEVCommand = new RouteCommand(EditExamEV);
             ClearSelEVCommand = new RouteCommand(ClearSelEV);
+            AvgMarkSVMCommand = new RouteCommand(AvgMarkSVM);
+            MaxMarkSVMCommand = new RouteCommand(MaxMarkSVM);
+            MinMarkSVMCommand = new RouteCommand(MinMarkSVM);
 
 
 
         }
 
 
-
-
         public ICommand GetExamsEVCommand { get; set; }
         public ICommand EditExamEVCommand { get; set; }
         public ICommand ClearSelEVCommand { get; set; }
-
+        public ICommand AvgMarkSVMCommand { get; set; }
+        public ICommand MaxMarkSVMCommand { get; set; }
+        public ICommand MinMarkSVMCommand { get; set; }
 
 
 
@@ -80,6 +83,39 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
+        private string _errorsSVM;
+        public string ErrorsSVM
+        {
+            get
+            {
+                return _errorsSVM;
+            }
+            set
+            {
+                _errorsSVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private double _markSVM;
+        public double MarkSVM
+        {
+            get
+            {
+                return _markSVM;
+            }
+            set
+            {
+                _markSVM = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+
+
+
 
 
         List<Exam> _examsListEV;
@@ -124,6 +160,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         public void GetStudentExamsEV()
         {
+            ErrorsSVM = "";
             var repo = Student.DepCon.Resolve<IRepository<StudentExam>>();
 
             if (CurrentExamEV != null)
@@ -137,6 +174,13 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
             }
 
+            if (StudentExamsListEV.Count == 0)
+            {
+                ErrorsSVM = "No hay Exámenes para mostrar";
+                TitleEVM = "";
+                SubjectNameEVM = "";
+                CurrentExamEV = null;
+            }
 
         }
 
@@ -146,23 +190,29 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         public void EditExamEV()
         {
-            //Exam exam = new Exam();
-            Subject subject = new Subject();
-
-            var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
-            var subjectsList = new List<Subject>();
-            subjectsList = repo.QueryAll().ToList();
-
-            subject = subjectsList.FirstOrDefault(x => x.Id == CurrentExamEV.SubjectId);
+            ErrorsSVM = "";
 
 
-            //exam = CurrentExamEV;
+            if (CurrentExamEV != null)
+            {
+                Subject subject = new Subject();
+
+                var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
+                var subjectsList = new List<Subject>();
+                subjectsList = repo.QueryAll().ToList();
+
+                subject = subjectsList.FirstOrDefault(x => x.Id == CurrentExamEV.SubjectId);
 
 
-            TitleEVM = CurrentExamEV.Title;
-            SubjectNameEVM = subject.Name;
+                TitleEVM = CurrentExamEV.Title;
+                SubjectNameEVM = subject.Name;
 
-            GetStudentExamsEV();
+                GetStudentExamsEV();
+
+            }
+
+            else
+                ErrorsSVM = "No nas seleccionado ningún Examen";
 
             isEdit = true;
 
@@ -176,7 +226,107 @@ namespace WPFAcademyMVVMFinal.ViewModels
             CurrentExamEV = null;
             GetStudentExamsEV();
             StudentExamsListEV.Clear();
+            MarkSVM = 0;
         }
-          //Seguir aqui !! : Pdte desarrollar max min y avg !!
+
+
+
+        #region  Statistics
+
+
+        public void AvgMarkSVM()
+        {
+            MarkSVM = 0;
+            var marksList = new List<double>();
+            marksList = MarksListSVM();
+
+            if (marksList == null) { }
+
+            else
+            {
+                MarkSVM = marksList.Average();
+                StudentExamsListEV.Clear();
+            }
+        }
+
+        public void MaxMarkSVM()
+        {
+            MarkSVM = 0;
+
+            var marksList = new List<double>();
+            marksList = MarksListSVM();
+
+            if (marksList == null) { }
+
+            else
+            {
+                MarkSVM = marksList.Max();
+                StudentExamsListEV = StudentExamsListEV.FindAll(x => x.Mark == MarkSVM).ToList();
+
+            }
+
+        }
+
+
+        public void MinMarkSVM()
+        {
+            MarkSVM = 0;
+
+            var marksList = new List<double>();
+            marksList = MarksListSVM();
+
+            if (marksList == null) { }
+
+            else
+            {
+                MarkSVM = marksList.Min();
+
+                StudentExamsListEV = StudentExamsListEV.FindAll(x => x.Mark == MarkSVM).ToList();
+            }
+        }
+
+
+        public List<double> MarksListSVM()
+        {
+            ErrorsSVM = "";
+            GetStudentExamsEV();  
+
+
+            if (CurrentExamEV != null)
+            {
+
+
+                var marksList = new List<double>();
+
+                foreach (StudentExam stuEx in StudentExamsListEV)
+                {
+                    marksList.Add(stuEx.Mark);
+                }
+
+                return marksList;
+            }
+
+
+            else
+            {
+
+                var repo = Subject.DepCon.Resolve<IRepository<StudentExam>>();
+                List<StudentExam> StudentExamsList = new List<StudentExam>();
+                StudentExamsList = repo.QueryAll().ToList();
+
+
+                var marksList = new List<double>();
+
+                foreach (StudentExam stuEx in StudentExamsListEV)
+                {
+                    marksList.Add(stuEx.Mark);
+                }
+
+                return marksList;
+            }
+
+        }
+        #endregion
+
     }
 }

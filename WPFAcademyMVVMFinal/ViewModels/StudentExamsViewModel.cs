@@ -52,6 +52,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
+
         private string _nameSEVM;
         public string NameSEVM
         {
@@ -62,6 +63,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 OnPropertyChanged();
             }
         }
+
 
         private string _titleSEVM;
 
@@ -351,7 +353,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void DelStudentExamsSEVM()    //Funciona OK
+        public void DelStudentExamsSEVM()    
         {
             StudentExam studentExam = new StudentExam();
 
@@ -372,20 +374,13 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
                 GetStudentExamsSEVM();
 
-                //DniSEVM = "";
-                //NameSEVM = "";
-                //TitleSEVM = "";
-                //SubjectNameSEVM = "";
-                //DateSEVM = default;
-                //MarkSEVM = 0;
-                //HasCheatedSEVM = false;
 
             }
         }
 
 
 
-        private void FindStudentSEVM()   //Funciona OK  
+        private void FindStudentSEVM()    
         {
             var studentsVM = new StudentsViewModel();
             StudentSubject studentSubjectMVM = new StudentSubject();
@@ -416,14 +411,14 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void GetExamsSEVM()  //OK Funciona bien
+        public void GetExamsSEVM()  
         {
             Exam exam = new Exam();
             var repo = Student.DepCon.Resolve<IRepository<Exam>>();
             ExamsListSEVM = repo.QueryAll().ToList();
         }
 
-        public void SelExamSEVM()  //OK Funciona bien
+        public void SelExamSEVM()  
         {
             Exam exam = new Exam();
             if (CurrentStudentSEVM==null)
@@ -445,7 +440,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         }
 
-        public void GetStudentExamsSEVM()  //  OK funciona perfecto !!.
+        public void GetStudentExamsSEVM()  
         {
             Student student = new Student();
             Exam exam = new Exam();

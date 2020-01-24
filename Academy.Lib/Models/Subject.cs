@@ -25,7 +25,7 @@ namespace Academy.Lib.Models
             return saveResult;
         }
 
-        public DeleteResult<Subject> Delete()  //Modificat per DeleteResult
+        public DeleteResult<Subject> Delete()  
         {
             var deleteResult = base.Delete<Subject>();
 
@@ -74,7 +74,7 @@ namespace Academy.Lib.Models
                 output.Errors.Add("ya existe una Asignatura con ese nombre");
 
             }
-            else if (currentId != default && entityWithName != null && entityWithName.Id != currentId)    //Modificado
+            else if (currentId != default && entityWithName != null && entityWithName.Id != currentId)    
             {
                 if (entityWithName.Name == name)
                 {

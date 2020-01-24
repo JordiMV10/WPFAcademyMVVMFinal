@@ -25,7 +25,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         public ICommand SaveStudentCommand { get; set; }
         public ICommand GetStudentsCommand { get; set; }
 
-        public ICommand DelStudentCommand { get; set; } //Meu funciona OK
+        public ICommand DelStudentCommand { get; set; } 
         public ICommand EditStudentCommand { get; set; }
         #endregion
 
@@ -94,7 +94,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         private Student _currentStudent;
-        public Student CurrentStudent  //Meu ok funciona !!
+        public Student CurrentStudent  
         {
             get { return _currentStudent; }
             set
@@ -207,7 +207,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void DelStudent()    //Meu, verificado funciona OK
+        public void DelStudent()    
         {
 
             Student student = new Student();
@@ -228,7 +228,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 ErrorsList = new List<ErrorMessage>();
                 ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-
                 GetStudents();
 
                 DniVM = "";
@@ -241,7 +240,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
 
-        public void EditStudent()   //Meu : Funciona ok. 
+        public void EditStudent()    
         {
             var student = new Student();
 
@@ -249,7 +248,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
             {
                 student.Save();
                 ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
-
             }
 
             else

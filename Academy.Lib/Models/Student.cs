@@ -21,7 +21,7 @@ namespace Academy.Lib.Models
 
         }
 
-        //MEU tot 
+         
         public SaveResult<Student> Save()
         {
             return base.Save<Student>();
@@ -30,7 +30,7 @@ namespace Academy.Lib.Models
         }
 
 
-        public DeleteResult<Student> Delete()  //Modificat per DeleteResult
+        public DeleteResult<Student> Delete()  
         {
             var deleteResult = base.Delete<Student>();
 
@@ -88,7 +88,6 @@ namespace Academy.Lib.Models
             #region check duplication
             var repo = DepCon.Resolve<IRepository<Student>>();
 
-            //var entityWithDni = repo.GetStudentByDni(dni, currentId);  //Jose
             var entityWithDni = repo.QueryAll().FirstOrDefault(s => s.Dni == dni);
 
 
@@ -100,7 +99,7 @@ namespace Academy.Lib.Models
 
             }
 
-            else if (currentId != default && entityWithDni != null && entityWithDni.Id != currentId)    //Modificado
+            else if (currentId != default && entityWithDni != null && entityWithDni.Id != currentId)    
             {
                 if (entityWithDni.Dni == dni)
                 {
@@ -176,7 +175,7 @@ namespace Academy.Lib.Models
 
                 var currentStudentInChair = repo.QueryAll().FirstOrDefault(s => s.ChairNumber == chairNumber);
 
-                if (currentStudentInChair != null && currentStudentInChair.Id != currentId)   //meu
+                if (currentStudentInChair != null && currentStudentInChair.Id != currentId)  
                 {
 
                     output.IsSuccess = false;
@@ -209,7 +208,6 @@ namespace Academy.Lib.Models
             #region check duplication
             var repo = DepCon.Resolve<IRepository<Student>>();
 
-            //var entityWithDni = repo.GetStudentByDni(dni, currentId);  //Jose
             var entityWithEmail = repo.QueryAll().FirstOrDefault(s => s.Email == email);
 
             if (currentId == default && entityWithEmail != null)

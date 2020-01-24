@@ -155,6 +155,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
+
         List<StudentExam> _studentExamsListSVM;
         public List<StudentExam> StudentExamsListSVM
         {

@@ -34,14 +34,14 @@ namespace Academy.Lib.Models
         }
 
 
-        public SaveResult<Exam> Save() // OK Funciona
+        public SaveResult<Exam> Save() 
         {
             var saveResult = base.Save<Exam>();
 
             return saveResult;
         }
 
-        public DeleteResult<Exam> Delete()  //OK funciona bien
+        public DeleteResult<Exam> Delete()  
         {
             var deleteResult = base.Delete<Exam>();
 

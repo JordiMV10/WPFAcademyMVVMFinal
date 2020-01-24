@@ -25,7 +25,6 @@
             <Label Content="Nombre" HorizontalAlignment="Left" Margin="22,45,0,0" VerticalAlignment="Top" Width="78"/>
             <Label Content="Silla" HorizontalAlignment="Left" Margin="22,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
             <Label Content="e_Mail" HorizontalAlignment="Left" Margin="22,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
-
             <TextBox x:Name="DniText" HorizontalAlignment="Left" Height="23" Margin="125,10,0,0" TextWrapping="Wrap" Text="{Binding DniVM}" VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.292,0.209"/>
             <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="23" Margin="125,45,0,0" TextWrapping="Wrap" Text="{Binding NameVM}" VerticalAlignment="Top" Width="195"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="125,80,0,0" TextWrapping="Wrap" Text="{Binding ChairTextVM}" VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.668,0.443"/>
@@ -35,9 +34,8 @@
                 <DataGrid ItemsSource="{Binding ErrorsList}" />
             </Grid>
             <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
-
-
         </Grid>
+        
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

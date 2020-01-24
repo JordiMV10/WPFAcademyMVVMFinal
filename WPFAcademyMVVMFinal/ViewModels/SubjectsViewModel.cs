@@ -25,7 +25,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         #region Commands
         public ICommand SaveSubjectCommand { get; set; }
         public ICommand GetSubjectsCommand { get; set; }
-        public ICommand DelSubjectCommand { get; set; } //Meu funciona OK
+        public ICommand DelSubjectCommand { get; set; } 
         public ICommand EditSubjectCommand { get; set; }
 
         #endregion
@@ -57,7 +57,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         private Subject _currentSubject;
-        public Subject CurrentSubject  //Meu ok funciona !!
+        public Subject CurrentSubject  
         {
             get { return _currentSubject; }
             set
@@ -70,7 +70,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         List<Subject> _subjectsList;
-        public List<Subject> SubjectList  //Meu : OK funciona
+        public List<Subject> SubjectList  
         {
             get
             {
@@ -79,11 +79,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
             set
             {
                 _subjectsList = value;
-
-                //if (value != null && value.Count > 0)  //Nou
-                //{
-                //    CurrentSubject = value[0];          //Nou
-                //}                                       //Nou
                 OnPropertyChanged();
             }
         }
@@ -110,7 +105,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
         bool isEdit = false;
 
-        public void SaveSubject()   //Meu : OK funciona
+        public void SaveSubject()   
         {
 
             Subject subject = new Subject()
@@ -137,7 +132,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
             isEdit = false;
         }
 
-        public void GetSubjects()    //Meu : OK funciona
+        public void GetSubjects()    
         {
             var subject = new Subject();
             var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
@@ -145,7 +140,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void EditSubject()   //Meu : Funciona ok. 
+        public void EditSubject()   
         {
             var subject = new Subject();
 
@@ -173,7 +168,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void DelSubject()    //Meu, verificado funciona OK
+        public void DelSubject()    
         {
             Subject subject = new Subject();
 

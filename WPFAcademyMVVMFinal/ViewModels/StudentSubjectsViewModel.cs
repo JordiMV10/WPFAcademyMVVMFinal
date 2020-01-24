@@ -62,20 +62,10 @@ namespace WPFAcademyMVVMFinal.ViewModels
             }
         }
 
-        //private string _managementErrorMGVM;
-        //public string ManagementErrorMGVM
-        //{
-        //    get { return _managementErrorMGVM; }
-        //    set
-        //    {
-        //        _managementErrorMGVM = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
 
 
         private Student _currentStudentMVM;
-        public Student CurrentStudentMVM  //Meu ok funciona !!
+        public Student CurrentStudentMVM  
         {
             get { return _currentStudentMVM; }
             set
@@ -86,7 +76,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
         private Subject _currentSubjectMVM;
-        public Subject CurrentSubjectMVM  //Meu ok funciona !!
+        public Subject CurrentSubjectMVM  
         {
             get { return _currentSubjectMVM; }
             set
@@ -97,7 +87,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
         private StudentSubject _currentStudentSubjectMVM;
-        public StudentSubject CurrentStudentSubjectMVM  //Meu ok funciona !!
+        public StudentSubject CurrentStudentSubjectMVM  
         {
             get { return _currentStudentSubjectMVM; }
             set
@@ -109,7 +99,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         List<Subject> _subjectsListMGVM;
-        public List<Subject> SubjectListMGVM  //Meu : OK funciona
+        public List<Subject> SubjectListMGVM  
         {
             get
             {
@@ -124,7 +114,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         List<Subject> _subjectsByNameList;
-        public List<Subject> SubjectsByNameList  //Meu 
+        public List<Subject> SubjectsByNameList   
         {
             get
             {
@@ -141,7 +131,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
 
 
         List<StudentSubject> _subjectsByStudentList;
-        public List<StudentSubject> SubjectsByStudentList  //Meu 
+        public List<StudentSubject> SubjectsByStudentList   
         {
             get
             {
@@ -156,7 +146,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        List<ErrorMessage> _errorsList;  //Nou
+        List<ErrorMessage> _errorsList;  
         public List<ErrorMessage> ErrorsList
         {
             get
@@ -203,7 +193,7 @@ namespace WPFAcademyMVVMFinal.ViewModels
         }
 
 
-        public void DelSubjectToListVM()   //MEU OK Funciona
+        public void DelSubjectToListVM()   
         {
             StudentSubject studentSubjectMVM = new StudentSubject();
 
@@ -222,18 +212,15 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 studentSubjectMVM.Delete();
                 ErrorsList = studentSubjectMVM.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
-
                 SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
                 
-
                 GetSubjectsToStudent();
 
             }
-
         }
 
 
-        public void GetSubjectsToStudent()  //MEU OK Funciona 
+        public void GetSubjectsToStudent()  
         {
             Student student = new Student();
             StudentSubject studentSubjectMVM = new StudentSubject();
@@ -246,11 +233,9 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
 
             }
-
-
         }
 
-        private void FindStudent()   //Meu : Funciona OK
+        private void FindStudent()   
         {
             var studentsVM = new StudentsViewModel();
             StudentSubject studentSubjectMVM = new StudentSubject();
@@ -266,7 +251,6 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 NameMGVM = CurrentStudentMVM.Name;
                 ErrorsList = new List<ErrorMessage>();
 
-
                 GetSubjectsToStudent();
             }
 
@@ -277,17 +261,14 @@ namespace WPFAcademyMVVMFinal.ViewModels
                 CurrentStudentMVM = student;
                 ErrorsList = new List<ErrorMessage>();
 
-
                 GetSubjectsToStudent();
                 DniMGVM = "";
 
             }
-
-
         }
 
 
-        public void GetSubjectsMGVM()    //Meu : OK funciona
+        public void GetSubjectsMGVM()    
         {
             var subject = new Subject();
             var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
